@@ -1,0 +1,1 @@
+This is a landing page for an art class organized by the celebrity artist.
