@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Healing Journey</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#5D5CDE',
+                        burgundy: '#B45252',
+                        gold: '#E1B87F',
+                        cream: '#F0E6D8',
+                        charcoal: '#333333',
+                    },
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'serif'],
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                }
+            },
+        }
+    </script>
+    <script src="https://unpkg.com/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script src="https://unpkg.com/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap');
+
+        :root {
+            --primary-color: #B45252;
+            --teal: #36B5B0;
+            --blue: #4A6FA5;
+            --purple: #9747FF;
+            --mint: #86E3CE;
+            --burgundy: #B45252;
+            --gold: #E1B87F;
+            --cream: #F0E6D8;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .dark {
+            color-scheme: dark;
+        }
+
+        .dark body {
+            background-color: #181818;
+            color: #fff;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+        }
+
+        .fluid-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-style: italic;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .art-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        .fluid-shape {
+            position: absolute;
+            opacity: 0.6;
+            filter: blur(80px);
+            z-index: -1;
+            transition: all 8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .fluid-shape.shape1 {
+            background: var(--burgundy);
+            top: 5%;
+            left: -10%;
+            width: 45vw;
+            height: 45vh;
+            border-radius: 70% 30% 50% 50% / 60% 40% 60% 40%;
+        }
+
+        .fluid-shape.shape2 {
+            background: var(--gold);
+            top: 40%;
+            right: -10%;
+            width: 40vw;
+            height: 40vh;
+            border-radius: 60% 40% 30% 70% / 50% 50% 50% 50%;
+        }
+
+        .fluid-shape.shape3 {
+            background: var(--blue);
+            top: 70%;
+            left: 10%;
+            width: 35vw;
+            height: 35vh;
+            border-radius: 40% 60% 70% 30% / 40% 60% 40% 60%;
+        }
+
+        .fluid-shape.shape4 {
+            background: var(--cream);
+            top: 15%;
+            right: 15%;
+            width: 30vw;
+            height: 30vh;
+            border-radius: 50% 50% 60% 40% / 30% 70% 40% 60%;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .dark .card {
+            background: rgba(30, 30, 30, 0.7);
+            border: 1px solid rgba(70, 70, 70, 0.2);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(180, 82, 82, 0.15);
+        }
+
+        .dark .card:hover {
+            box-shadow: 0 20px 40px rgba(180, 82, 82, 0.25);
+        }
+
+        .image-mask {
+            mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='black' d='M54.2,-47.4C68.4,-33.5,77.2,-11,73.5,8.4C69.7,27.8,53.4,44.1,34.4,56.3C15.4,68.5,-6.3,76.6,-24.9,71.3C-43.6,66,-59.3,47.3,-67.2,25.7C-75.1,4.2,-75.3,-20.2,-64.3,-37.5C-53.4,-54.9,-31.3,-65.1,-8.8,-58.9C13.7,-52.8,40,-61.2,54.2,-47.4Z' transform='translate(100 100)' /%3E%3C/svg%3E");
+            -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='black' d='M54.2,-47.4C68.4,-33.5,77.2,-11,73.5,8.4C69.7,27.8,53.4,44.1,34.4,56.3C15.4,68.5,-6.3,76.6,-24.9,71.3C-43.6,66,-59.3,47.3,-67.2,25.7C-75.1,4.2,-75.3,-20.2,-64.3,-37.5C-53.4,-54.9,-31.3,-65.1,-8.8,-58.9C13.7,-52.8,40,-61.2,54.2,-47.4Z' transform='translate(100 100)' /%3E%3C/svg%3E");
+        }
+        
+        .image-mask-2 {
+            mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='black' d='M45.9,-46.1C56.3,-31.9,59.7,-15.9,59.5,-0.1C59.4,15.6,55.8,31.3,45.3,41.9C34.9,52.6,17.4,58.2,-0.3,58.4C-17.9,58.7,-35.9,53.5,-49.1,42.3C-62.3,31,-70.7,15.5,-71.7,-0.9C-72.7,-17.4,-66.2,-34.8,-53.3,-49C-40.3,-63.2,-20.1,-74.3,-1.9,-72.7C16.4,-71.1,32.8,-56.8,45.9,-46.1Z' transform='translate(100 100)' /%3E%3C/svg%3E");
+            -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='black' d='M45.9,-46.1C56.3,-31.9,59.7,-15.9,59.5,-0.1C59.4,15.6,55.8,31.3,45.3,41.9C34.9,52.6,17.4,58.2,-0.3,58.4C-17.9,58.7,-35.9,53.5,-49.1,42.3C-62.3,31,-70.7,15.5,-71.7,-0.9C-72.7,-17.4,-66.2,-34.8,-53.3,-49C-40.3,-63.2,-20.1,-74.3,-1.9,-72.7C16.4,-71.1,32.8,-56.8,45.9,-46.1Z' transform='translate(100 100)' /%3E%3C/svg%3E");
+        }
+        
+        .image-mask-3 {
+            mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='black' d='M40.8,-38.1C52.5,-23.8,62,-11.9,64.1,2.1C66.2,16.2,61,32.4,49.3,42.1C37.6,51.8,18.8,55,1.9,53.3C-15,51.6,-30,45,-41.9,34C-53.9,23,-62.8,7.5,-62.9,-8.2C-63,-23.9,-54.3,-39.8,-41.8,-54.2C-29.2,-68.6,-12.8,-79.2,0.7,-79.8C14.2,-80.5,28.5,-70.2,40.8,-57.2C53,-44.2,65,-33.3,40.8,-38.1Z' transform='translate(100 100)' /%3E%3C/svg%3E");
+            -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='black' d='M40.8,-38.1C52.5,-23.8,62,-11.9,64.1,2.1C66.2,16.2,61,32.4,49.3,42.1C37.6,51.8,18.8,55,1.9,53.3C-15,51.6,-30,45,-41.9,34C-53.9,23,-62.8,7.5,-62.9,-8.2C-63,-23.9,-54.3,-39.8,-41.8,-54.2C-29.2,-68.6,-12.8,-79.2,0.7,-79.8C14.2,-80.5,28.5,-70.2,40.8,-57.2C53,-44.2,65,-33.3,40.8,-38.1Z' transform='translate(100 100)' /%3E%3C/svg%3E");
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 100%);
+            transform: translateX(-100%);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(180, 82, 82, 0.3);
+        }
+
+        .btn-primary:hover::after {
+            transform: translateX(100%);
+        }
+
+        .dark .btn-primary:hover {
+            box-shadow: 0 10px 20px rgba(180, 82, 82, 0.5);
+        }
+        
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .text-split-animation span {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .testimonial-card {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .testimonial-image {
+            transform: translateZ(20px) scale(1.05);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .testimonial-card:hover .testimonial-image {
+            transform: translateZ(40px) scale(1.05);
+        }
+
+        .image-parallax {
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Marquee animation for the gallery section */
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .marquee-content {
+            animation: marquee 60s linear infinite;
+            display: flex;
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--primary-color);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: all 0.1s ease;
+        }
+        
+        /* Benefits card hover effect */
+        .benefit-card:hover .hexagon-bg {
+            transform: rotate(6deg) scale(1.05);
+        }
+        
+        /* Pulsing animation for the CTA button */
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.1); opacity: 0.4; }
+            100% { transform: scale(1); opacity: 0.6; }
+        }
+        
+        .animate-pulse {
+            animation: pulse 3s infinite ease-in-out;
+        }
+        
+        /* Weekly schedule styles */
+        .week-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        .week-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            background: linear-gradient(45deg, var(--burgundy), var(--gold), var(--blue), var(--cream));
+            z-index: -2;
+            opacity: 0.5;
+            border-radius: inherit;
+            transition: opacity 0.4s ease;
+        }
+        
+        .week-card::after {
+            content: '';
+            position: absolute;
+            inset: 1px;
+            background: white;
+            border-radius: inherit;
+            z-index: -1;
+        }
+        
+        .dark .week-card::after {
+            background: #181818;
+        }
+        
+        .week-card:hover::before {
+            opacity: 0.8;
+        }
+        
+        .week-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark .week-card:hover {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body class="bg-white text-gray-800 relative">
+    <!-- Custom cursor -->
+    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-outline hidden md:block"></div>
+
+    <!-- Fluid background shapes -->
+    <div class="fluid-shape shape1"></div>
+    <div class="fluid-shape shape2"></div>
+    <div class="fluid-shape shape3"></div>
+    <div class="fluid-shape shape4"></div>
+
+    <!-- Navigation -->
+    <nav class="container mx-auto px-6 py-6 md:py-8 flex justify-between items-center relative z-10">
+        <div class="text-2xl font-serif font-light tracking-wider">
+           CELEBRITY <span class="text-burgundy font-normal">ARTIST</span>
+        </div>
+        <div class="hidden md:flex space-x-8">
+            <a href="#" class="hover:text-burgundy transition-colors text-sm tracking-wider">Home</a>
+            <a href="#" class="hover:text-burgundy transition-colors text-sm tracking-wider">Support</a>
+            <a href="#" class="hover:text-burgundy transition-colors text-sm tracking-wider">Community</a>
+        </div>
+        <button class="md:hidden focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="container mx-auto pt-24 md:pt-32 pb-20 md:pb-28 px-6 md:px-20 relative overflow-hidden">
+        <div class="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+            <div class="scroll-reveal">
+                <h1 class="text-split-animation">
+                    <span class="art-title text-sm text-burgundy block mb-2">Creative Expression</span>
+                    <span class="fluid-title text-5xl md:text-7xl mb-6 block">
+                        Release  <span class="text-burgundy relative">
+                            Stress
+                            <svg class="absolute -bottom-1 left-0 w-full h-2 text-burgundy opacity-20" viewBox="0 0 200 9" fill="none">
+                                <path d="M0 4.5C50 -1.5 150 -1.5 200 4.5" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
+                            </svg>
+                        </span>
+                        & Escape the 9 - 5 Grind
+                    </span>
+                </h1>
+                <p class="text-lg md:text-xl mb-10 max-w-xl font-light opacity-90">
+                    Without changing your schedule or leaving the comfort of your home.
+                </p>
+                <button class="btn-primary text-white px-8 py-3 rounded-full shadow-lg font-light tracking-wider">
+                    Begin Your Journey
+                </button>
+            </div>
+            <div class="scroll-reveal relative">
+                <div class="relative overflow-hidden image-mask">
+                    <!-- Using the abstract painting image for the hero section -->
+                    <img src="https://pfst.cf2.poecdn.net/base/image/30c45d5a0e94dd26ac940f2334e253cd24e09eb60d128e0d9e8e6f7ab0da6055?w=1024&h=1024" alt="Abstract artistic expression" class="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700 ease-in-out">
+                    <div class="absolute inset-0 bg-gradient-to-t from-burgundy/20 to-transparent opacity-70 mix-blend-multiply"></div>
+                </div>
+                <div class="hidden md:block absolute -bottom-10 -right-10 w-32 h-32 rounded-full bg-cream/30 backdrop-blur-lg"></div>
+                <div class="hidden md:block absolute -top-16 -left-10 w-24 h-24 rounded-full bg-burgundy/10 backdrop-blur-lg"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Why Request an Invitation Section -->
+    <section class="py-16 md:py-24 px-6 container mx-auto relative bg-burgundy/10 rounded-3xl my-12">
+        <div class="text-center mb-16 scroll-reveal">
+            <h2 class="fluid-title text-4xl md:text-5xl mb-8">
+                Why Do I Need to Request an <span class="text-burgundy">Invitation?</span>
+            </h2>
+            <div class="max-w-3xl mx-auto">
+                <p class="text-lg md:text-xl mb-8">
+                    As earlier mentioned, this isn't just a program, it's a deeply personal and transformative journey.
+                </p>
+                <p class="text-lg md:text-xl mb-8">
+                    To maintain an intimate and meaningful experience, participation is by invitation only.
+                    This ensures that every member is truly committed to their growth, making the experience more powerful and rewarding for all involved.
+                </p>
+                <p class="text-lg md:text-xl mb-10">
+                    Most importantly, your invitation includes a 1:1 session to explore your needs and ensure this journey is the right fit for you.
+                </p>
+            </div>
+        </div>
+
+        <div class="max-w-3xl mx-auto scroll-reveal">
+            <h3 class="text-2xl md:text-3xl text-center mb-8 font-serif text-burgundy">
+                In your private session, we will:
+            </h3>
+            <div class="space-y-4">
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center mt-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <p class="text-lg">Talk about what causes your stress and how this journey can help.</p>
+                </div>
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center mt-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <p class="text-lg">Guide you through the next steps in the program.</p>
+                </div>
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center mt-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <p class="text-lg">Make sure this is the right path for your growth and healing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- The Hidden Cost Section -->
+    <section class="py-16 md:py-28 px-6 container mx-auto relative">
+        <div class="text-center mb-16 scroll-reveal">
+            <h2 class="fluid-title text-4xl md:text-5xl mb-6">
+                The Hidden Cost of <span class="text-burgundy">Ignoring Your Well-Being</span>
+            </h2>
+        </div>
+        <div class="card p-10 md:p-16 rounded-2xl max-w-4xl mx-auto scroll-reveal">
+            <p class="text-lg md:text-xl mb-8">
+                Stress doesn't just disappear, it builds up, silently affecting your mind, body, and daily life. If you keep pushing through without an outlet, your sleep suffers, your energy drops, and your work and relationships start to feel like obligations instead of joys.
+            </p>
+            <p class="text-lg md:text-xl mb-8">
+                Right now, you may think, "I'll handle it later." But later turns into months, even years, of feeling overwhelmed. With structured yet flexible sessions twice a week, you'll have a space to release stress, regain clarity, and reconnect with the part of you that feels focused, creative, and in control.
+            </p>
+        </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="py-16 md:py-24 px-6 container mx-auto relative">
+        <div class="scroll-reveal text-center max-w-3xl mx-auto">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto mb-6 text-burgundy opacity-30" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+            </svg>
+            <p class="fluid-title text-2xl md:text-4xl italic mb-8">
+                "Art washes away from the soul the dust of everyday life."
+            </p>
+            <p class="text-lg font-medium text-burgundy">Pablo Picasso</p>
+        </div>
+    </section>
+
+    <!-- Who This Journey Is For Section -->
+    <section class="py-16 md:py-28 px-6 container mx-auto relative bg-gradient-to-b from-transparent to-burgundy/5 rounded-3xl">
+        <div class="text-center mb-16 scroll-reveal">
+            <h2 class="fluid-title text-4xl md:text-5xl mb-6">
+                To help you decide, and without wasting time, let's dive into the mindset, <br class="hidden md:block"> needs, and goals of those this journey was designed for.
+            </h2>
+        </div>
+
+        <div class="space-y-12 md:space-y-20 max-w-4xl mx-auto">
+            <!-- Peace and Emotional Release -->
+            <div class="scroll-reveal">
+                <h3 class="text-3xl md:text-4xl text-center mb-8 font-serif text-burgundy">
+                    IF YOU WANT PEACE AND EMOTIONAL RELEASE
+                </h3>
+                <p class="text-lg md:text-xl text-center">
+                    Your mind is always racing work, deadlines, responsibilities. You crave a space to just breathe.
+                    Art gives you that. With every brushstroke, stress fades, and calm takes over. No pressure, no rush just peace.
+                </p>
+            </div>
+
+            <!-- Relief, Expression and Fulfillment -->
+            <div class="scroll-reveal">  
+                <h3 class="text-3xl md:text-4xl text-center mb-8 font-serif text-burgundy">
+                    IF YOU WANT RELIEF, EXPRESSION AND FULFILLMENT
+                </h3>
+                <p class="text-lg md:text-xl text-center">
+                    The daily grind feels endless. You want more than just getting through you want to feel alive.
+                    Art lets you break free, express yourself, and find joy in creating. It's not about making perfect art, it's about feeling free.
+                </p>
+            </div>
+
+            <!-- Feel Inspired, Unstoppable and Renewed -->
+            <div class="scroll-reveal">
+                <h3 class="text-3xl md:text-4xl text-center mb-8 font-serif text-burgundy">
+                    IF YOU WANT TO FEEL INSPIRED, UNSTOPPABLE AND RENEWED
+                </h3>
+                <p class="text-lg md:text-xl text-center">
+                    Lately, life feels dull. You miss that spark that energy. Art brings it back. Colors, movement, creativity it's a fresh start.
+                    You won't just feel refreshed; you'll feel unstoppable.
+                </p>
+            </div>
+        </div>
+
+        <div class="mt-20 bg-burgundy text-white py-10 px-6 rounded-xl text-center">
+            <h3 class="text-2xl md:text-3xl mb-4 font-serif">
+                If none of that disqualifies you, keep reading.
+            </h3>
+            <p class="text-xl md:text-2xl">
+                This could be the most life-changing experience you'll ever have.
+            </p>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 md:py-28 px-6 container mx-auto relative">
+        <div class="text-center mb-16 scroll-reveal">
+            <h2 class="fluid-title text-4xl md:text-5xl mb-6">
+                What Our <span class="text-burgundy">Students Say</span>
+            </h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 md:gap-10">
+            <!-- Testimonial 1 -->
+            <div class="card hover:border-burgundy/30 p-8 rounded-xl scroll-reveal">
+                <!-- 5 Star Rating -->
+                <div class="flex mb-4 text-yellow-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.799-2.034c-.784-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.799-2.034c-.784-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.799-2.034c-.784-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.799-2.034c-.784-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.799-2.034c-.784-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    <span class="ml-2 text-gray-600 dark:text-gray-300">5.0</span>
+                </div>
+
+                <p class="text-gray-600 dark:text-gray-300 mb-6">
+                    "Art therapy has been a life-changing experience for me. I've always struggled with stress from my demanding job, but now I have tools to express and process my emotions in a healthy way."
+                </p>
+                
+                <div class="flex items-center">
+                    <img src="https://pfst.cf2.poecdn.net/base/image/8992412a64504b0dff3f0f0f56f7d05bc561fc877f0da3df2cecec52a9360119?w=875&h=1080" alt="Emily R." class="w-12 h-12 rounded-full object-cover">
+                    <div class="ml-4">
+                        <h4 class="font-medium">Emily R.</h4>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Marketing Executive</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial 2 -->
+            <div class="card hover:border-burgundy/30 p-8 rounded-xl scroll-reveal">
+                <!-- 5 Star Rating -->
+                <div class="flex mb-4 text-yellow-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.799-2.034c-.784-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.799-2.034c-.784-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.799-2.034c-.784-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.799-2.034c-.784-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.799-2.034c-.784-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    <span class="ml-2 text-gray-600 dark:text-gray-300">5.0</span>
+                </div>
+
+                <p class="text-gray-600 dark:text-gray-300 mb-6">
+                    "I was skeptical at first, but this program exceeded my expectations. The techniques are simple yet powerful, and I've noticed a significant reduction in my anxiety levels after just a few weeks."
+                </p>
+                
+                <div class="flex items-center">
+                    <img src="https://pfst.cf2.poecdn.net/base/image/a6cc84bce2b5a287f0b49b41772ebf7238bda71bb967404b95449d0fe00ff9a2?w=1080&h=1350" alt="Michael T." class="w-12 h-12 rounded-full object-cover">
+                    <div class="ml-4">
+                        <h4 class="font-medium">Michael T.</h4>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Software Engineer</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial 3 -->
+            <div class="card hover:border-burgundy/30 p-8 rounded-xl scroll-reveal">
+                <!-- 4.5 Star Rating -->
+                <div class="flex mb-4 text-yellow-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.799-2.034c-.784-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.799-2.034c-.784-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.799-2.034c-.784-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.799-2.034c-.784-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.799-2.034c-.784-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    <span class="ml-2 text-gray-600 dark:text-gray-300">4.5</span>
+                </div>
+
+                <p class="text-gray-600 dark:text-gray-300 mb-6">
+                    "Finding this art therapy program was exactly what I needed during a particularly stressful time in my life. It's given me a creative outlet and a way to process emotions I didn't even know I was holding onto."
+                </p>
+                
+                <div class="flex items-center">
+                    <img src="https://pfst.cf2.poecdn.net/base/image/0a83fa79455a5cc1497367eb9f25be706f82bed5bc2907396ee15a7285e0d76b?w=1080&h=1293" alt="Sophia K." class="w-12 h-12 rounded-full object-cover">
+                    <div class="ml-4">
+                        <h4 class="font-medium">Sophia K.</h4>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Healthcare Professional</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Weekly Schedule Section -->
+    <section class="py-16 md:py-28 px-6 container mx-auto relative">
+        <div class="text-center mb-16 scroll-reveal">
+            <span class="art-title text-sm text-burgundy block mb-2">Program Overview</span>
+            <h2 class="fluid-title text-4xl md:text-5xl mb-6">
+                Your Weekly <span class="text-burgundy">Schedule</span>
+            </h2>
+            <p class="text-lg max-w-2xl mx-auto font-light">
+                "Art for the Soul: 6 Weeks of Creative Healing Experience"
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Week 1 -->
+            <div class="week-card rounded-xl p-6 shadow-md scroll-reveal">
+                <div class="text-center mb-4">
+                    <h3 class="text-2xl font-serif font-medium mb-2">WEEK 1</h3>
+                    <h4 class="text-xl font-serif text-burgundy">Mandalas & Meditation</h4>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 italic">(Stress Reduction)</p>
+                </div>
+                
+                <div class="mb-4">
+                    <div class="text-center mb-2 font-medium">LIVE SESSION</div>
+                    <p class="text-center text-gray-600 dark:text-gray-300">Wednesday: 7:00 - 8:30 PM CST</p>
+                    <p class="text-center text-gray-600 dark:text-gray-300">Sunday: 6:00 - 7:30 PM CST</p>
+                    <p class="text-center text-sm text-burgundy mt-2">Includes: Private 1:1 session</p>
+                </div>
+                
+                <div class="mt-6 text-center text-gray-600 dark:text-gray-300 text-sm">
+                    You'll learn simple, calming rituals to relax anytime life feels overwhelming.
+                </div>
+            </div>
+            
+            <!-- Week 2 -->
+            <div class="week-card rounded-xl p-6 shadow-md scroll-reveal">
+                <div class="text-center mb-4">
+                    <h3 class="text-2xl font-serif font-medium mb-2">WEEK 2</h3>
+                    <h4 class="text-xl font-serif text-burgundy">Visual Storytelling</h4>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 italic">(Self Reflection & Insight)</p>
+                </div>
+                
+                <div class="mb-4">
+                    <div class="text-center mb-2 font-medium">LIVE SESSION</div>
+                    <p class="text-center text-gray-600 dark:text-gray-300">Wednesday: 7:00 - 8:30 PM CST</p>
+                    <p class="text-center text-gray-600 dark:text-gray-300">Sunday: 6:00 - 7:30 PM CST</p>
+                    <p class="text-center text-sm text-burgundy mt-2">Includes: Private 1:1 session + Surprise Bonus Class</p>
+                </div>
+                
+                <div class="mt-6 text-center text-gray-600 dark:text-gray-300 text-sm">
+                    You'll understand yourself better through personal symbolism.
+                </div>
+            </div>
+            
+            <!-- Week 3 -->
+            <div class="week-card rounded-xl p-6 shadow-md scroll-reveal">
+                <div class="text-center mb-4">
+                    <h3 class="text-2xl font-serif font-medium mb-2">WEEK 3</h3>
+                    <h4 class="text-xl font-serif text-burgundy">Movement & Expressive Art</h4>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 italic">(Emotional Release)</p>
+                </div>
+                
+                <div class="mb-4">
+                    <div class="text-center mb-2 font-medium">LIVE SESSION</div>
+                    <p class="text-center text-gray-600 dark:text-gray-300">Wednesday: 7:00 - 8:30 PM CST</p>
+                    <p class="text-center text-gray-600 dark:text-gray-300">Sunday: 6:00 - 7:30 PM CST</p>
+                    <p class="text-center text-sm text-burgundy mt-2">Includes: Private 1:1 session</p>
+                </div>
+                
+                <div class="mt-6 text-center text-gray-600 dark:text-gray-300 text-sm">
+                    You'll discover a healthy, creative way to express emotions.
+                </div>
+            </div>
+            
+            <!-- Week 4 -->
+            <div class="week-card rounded-xl p-6 shadow-md scroll-reveal">
+                <div class="text-center mb-4">
+                    <h3 class="text-2xl font-serif font-medium mb-2">WEEK 4</h3>
+                    <h4 class="text-xl font-serif text-burgundy">Nature's Connection</h4>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 italic">(Problem-Solving & Clarity)</p>
+                </div>
+                
+                <div class="mb-4">
+                    <div class="text-center mb-2 font-medium">LIVE SESSION</div>
+                    <p class="text-center text-gray-600 dark:text-gray-300">Wednesday: 7:00 - 8:30 PM CST</p>
+                    <p class="text-center text-gray-600 dark:text-gray-300">Sunday: 6:00 - 7:30 PM CST</p>
+                    <p class="text-center text-sm text-burgundy mt-2">Includes: Private 1:1 session + Surprise Bonus Class</p>
+                </div>
+                
+                <div class="mt-6 text-center text-gray-600 dark:text-gray-300 text-sm">
+                    You'll feel more grounded and develop a clearer mindset for challenges.
+                </div>
+            </div>
+            
+            <!-- Week 5 -->
+            <div class="week-card rounded-xl p-6 shadow-md scroll-reveal">
+                <div class="text-center mb-4">
+                    <h3 class="text-2xl font-serif font-medium mb-2">WEEK 5</h3>
+                    <h4 class="text-xl font-serif text-burgundy">Art & Sound Healing</h4>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 italic">(Self-Awareness & Emotional Regulation)</p>
+                </div>
+                
+                <div class="mb-4">
+                    <div class="text-center mb-2 font-medium">LIVE SESSION</div>
+                    <p class="text-center text-gray-600 dark:text-gray-300">Wednesday: 7:00 - 8:30 PM CST</p>
+                    <p class="text-center text-gray-600 dark:text-gray-300">Sunday: 6:00 - 7:30 PM CST</p>
+                    <p class="text-center text-sm text-burgundy mt-2">Includes: Private 1:1 session</p>
+                </div>
+                
+                <div class="mt-6 text-center text-gray-600 dark:text-gray-300 text-sm">
+                    You'll gain more control over your emotions through art and sound.
+                </div>
+            </div>
+            
+            <!-- Week 6 -->
+            <div class="week-card rounded-xl p-6 shadow-md scroll-reveal">
+                <div class="text-center mb-4">
+                    <h3 class="text-2xl font-serif font-medium mb-2">WEEK 6</h3>
+                    <h4 class="text-xl font-serif text-burgundy">Personal Ritual & Reflection</h4>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 italic">(Ritual Integration & Transformation)</p>
+                </div>
+                
+                <div class="mb-4">
+                    <div class="text-center mb-2 font-medium">LIVE SESSION</div>
+                    <p class="text-center text-gray-600 dark:text-gray-300">Wednesday: 7:00 - 8:30 PM CST</p>
+                    <p class="text-center text-gray-600 dark:text-gray-300">Sunday: 6:00 - 7:30 PM CST</p>
+                    <p class="text-center text-sm text-burgundy mt-2">Includes: Private 1:1 session + Surprise Bonus Class</p>
+                </div>
+                
+                <div class="mt-6 text-center text-gray-600 dark:text-gray-300 text-sm">
+                    You'll develop a lasting creative ritual that keeps you connected.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journey Benefits Section -->
+    <section class="py-16 md:py-28 px-6 container mx-auto relative overflow-hidden">
+        <div class="text-center mb-16 scroll-reveal">
+            <span class="art-title text-sm text-burgundy block mb-2">Your 6-Week Journey</span>
+            <h2 class="fluid-title text-4xl md:text-5xl mb-6">
+                Experience <span class="text-burgundy">emotional renewal</span> through art
+            </h2>
+            <p class="text-lg max-w-2xl mx-auto font-light">
+                Over the next 6 weeks, you'll step into a one-of-a-kind art experience designed for deep emotional renewal.
+            </p>
+        </div>
+
+        <div class="relative z-10">
+            <!-- Left side decorative element -->
+            <div class="absolute left-0 top-1/4 w-32 h-32 md:w-44 md:h-44 rounded-full bg-burgundy/5 backdrop-blur-xl -z-10"></div>
+            
+            <!-- Hexagon grid pattern for benefits -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+                
+                <!-- Benefit 1 -->
+                <div class="benefit-card relative group">
+                    <div class="hexagon-bg absolute inset-0 bg-gradient-to-br from-burgundy/5 to-gold/5 rounded-xl transform rotate-0 group-hover:rotate-6 transition-transform duration-700 -z-10"></div>
+                    <div class="card hover:border-burgundy/30 p-8 rounded-xl relative overflow-hidden transform transition-all duration-500">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-burgundy/10 to-transparent rounded-bl-full -z-10"></div>
+                        <div class="w-16 h-16 mb-6 rounded-full bg-burgundy/10 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-burgundy" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl md:text-2xl mb-4 font-serif">Self-Rediscovery</h3>
+                        <p class="text-gray-600 dark:text-gray-300 font-light">
+                            Rediscover yourself through self-reflection and creative expression. 
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Benefit 2 -->
+                <div class="benefit-card relative group">
+                    <div class="hexagon-bg absolute inset-0 bg-gradient-to-br from-cream/10 to-gold/5 rounded-xl transform rotate-0 group-hover:rotate-6 transition-transform duration-700 -z-10"></div>
+                    <div class="card hover:border-burgundy/30 p-8 rounded-xl relative overflow-hidden transform transition-all duration-500">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-cream/20 to-transparent rounded-bl-full -z-10"></div>
+                        <div class="w-16 h-16 mb-6 rounded-full bg-burgundy/10 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-burgundy" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl md:text-2xl mb-4 font-serif">Stress Reduction</h3>
+                        <p class="text-gray-600 dark:text-gray-300 font-light">
+                            Reduce stress and find a sense of inner peace.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Benefit 3 -->
+                <div class="benefit-card relative group">
+                    <div class="hexagon-bg absolute inset-0 bg-gradient-to-br from-burgundy/5 to-burgundy/10 rounded-xl transform rotate-0 group-hover:rotate-6 transition-transform duration-700 -z-10"></div>
+                    <div class="card hover:border-burgundy/30 p-8 rounded-xl relative overflow-hidden transform transition-all duration-500">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-burgundy/10 to-transparent rounded-bl-full -z-10"></div>
+                        <div class="w-16 h-16 mb-6 rounded-full bg-burgundy/10 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-burgundy" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl md:text-2xl mb-4 font-serif">Emotional Release</h3>
+                        <p class="text-gray-600 dark:text-gray-300 font-light">
+                            Release emotional tension in a safe and freeing way.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Benefit 4 -->
+                <div class="benefit-card relative group">
+                    <div class="hexagon-bg absolute inset-0 bg-gradient-to-br from-gold/10 to-cream/5 rounded-xl transform rotate-0 group-hover:rotate-6 transition-transform duration-700 -z-10"></div>
+                    <div class="card hover:border-burgundy/30 p-8 rounded-xl relative overflow-hidden transform transition-all duration-500">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-gold/10 to-transparent rounded-bl-full -z-10"></div>
+                        <div class="w-16 h-16 mb-6 rounded-full bg-burgundy/10 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-burgundy" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl md:text-2xl mb-4 font-serif">Self-Awareness</h3>
+                        <p class="text-gray-600 dark:text-gray-300 font-light">
+                            Gain deeper insight and self-awareness to understand your emotions.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Benefit 5 -->
+                <div class="benefit-card relative group">
+                    <div class="hexagon-bg absolute inset-0 bg-gradient-to-br from-burgundy/10 to-gold/5 rounded-xl transform rotate-0 group-hover:rotate-6 transition-transform duration-700 -z-10"></div>
+                    <div class="card hover:border-burgundy/30 p-8 rounded-xl relative overflow-hidden transform transition-all duration-500">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-burgundy/10 to-transparent rounded-bl-full -z-10"></div>
+                        <div class="w-16 h-16 mb-6 rounded-full bg-burgundy/10 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-burgundy" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl md:text-2xl mb-4 font-serif">New Perspectives</h3>
+                        <p class="text-gray-600 dark:text-gray-300 font-light">
+                            Improve problem-solving skills by seeing challenges from new perspectives.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Benefit 6 -->
+                <div class="benefit-card relative group">
+                    <div class="hexagon-bg absolute inset-0 bg-gradient-to-br from-cream/5 to-burgundy/5 rounded-xl transform rotate-0 group-hover:rotate-6 transition-transform duration-700 -z-10"></div>
+                    <div class="card hover:border-burgundy/30 p-8 rounded-xl relative overflow-hidden transform transition-all duration-500">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-cream/10 to-transparent rounded-bl-full -z-10"></div>
+                        <div class="w-16 h-16 mb-6 rounded-full bg-burgundy/10 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-burgundy" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl md:text-2xl mb-4 font-serif">Meaningful Connections</h3>
+                        <p class="text-gray-600 dark:text-gray-300 font-light">
+                            Build meaningful connections with like-minded individuals.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Request Your Invitation Section -->
+    <section class="py-16 md:py-28 px-6 container mx-auto relative">
+        <div class="text-center mb-12 scroll-reveal">
+            <h2 class="fluid-title text-4xl md:text-5xl mb-6">
+                Request Your Invitation <span class="text-burgundy">to</span>
+            </h2>
+            <p class="text-xl md:text-2xl font-serif text-burgundy mb-12">
+                Art for the Soul: 6-Week Creative Healing Experience.
+            </p>
+            <div class="max-w-3xl mx-auto bg-gray-50 dark:bg-gray-800/50 p-6 md:p-10 rounded-xl mb-12">
+                <p class="text-xl md:text-2xl mb-8 font-serif text-burgundy">
+                    This is an invitation-only transformation journey.
+                </p>
+                
+                <h3 class="text-xl font-medium mb-6">How It Works:</h3>
+                <ul class="space-y-3 text-left mb-8">
+                    <li class="flex items-start">
+                        <span class="text-burgundy mr-2">•</span> 
+                        <span>Request Your Invitation ($72 Investment Fee).</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-burgundy mr-2">•</span>
+                        <span>Receive a Private 1:1 Session to discuss your journey.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-burgundy mr-2">•</span>
+                        <span>After the 1:1 session, gain full access to the 6-week experience.</span>
+                    </li>
+                </ul>
+                
+                <div class="border-t border-gray-200 dark:border-gray-700 pt-6 mt-6">
+                    <h3 class="text-center font-medium mb-4">Note</h3>
+                    <p class="text-center mb-4">
+                        "Your <span class="text-burgundy font-medium">$72 investment</span> secures a private 1:1 session a personalized deep dive into your emotional and creative journey. 
+                        During this session, we'll explore your stress patterns, your relationship with creative expression, and introduce you to the healing process.
+                    </p>
+                    <p class="text-center">
+                        If it aligns, we'll go over the enrollment details and investment options for the full 6-week experience. But if at any point 
+                        you feel this journey isn't right for you, which is unlikely if you've made it this far, your $72 will be fully refunded. Because 
+                        this experience is about real transformation, nothing less and nothing forced."
+                    </p>
+                </div>
+            </div>
+            
+            <div class="max-w-3xl mx-auto mb-12">
+                <h3 class="text-2xl md:text-3xl mb-8 font-serif text-burgundy">
+                    What Your Invitation Includes:
+                </h3>
+                <div class="space-y-4">
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center mt-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <p class="text-lg">A Reserved Spot in this intimate, 20-person experience</p>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center mt-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <p class="text-lg">Private Community Access for ongoing support & shared growth</p>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center mt-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <p class="text-lg">A 1-on-1 Personalized Therapy Session ($150 Value – FREE)</p>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center mt-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <p class="text-lg">A Guidebook on Effective Art Relaxation Techniques ($97 Value – FREE)</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <h3 class="text-2xl md:text-3xl mb-8 font-serif text-burgundy">
+                    How Flexible Is This Experience?
+                </h3>
+                <p class="text-lg mb-8">
+                    This experience is designed to seamlessly fit into your schedule while guiding you through a structured, inspiring creative journey.
+                </p>
+                
+                <div class="mb-8">
+                    <h4 class="font-medium text-xl mb-4">Program Schedule:</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <span class="text-burgundy mr-2">•</span> 
+                            <span>Wednesdays (7–8:30 PM CST) – <span class="font-medium">Pre-weekend reset</span></span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-burgundy mr-2">•</span>
+                            <span>Sundays (6–7:30 PM CST) – <span class="font-medium">Weekend refresh to start your week strong</span></span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="mb-8">
+                    <h4 class="font-medium text-xl mb-4">Recorded Classes:</h4>
+                    <p>Available 3 hours after each session ends.</p>
+                </div>
+                
+                <div class="mb-12">
+                    <h4 class="font-medium text-xl mb-4">Personalized Guidance:</h4>
+                    <p>
+                        Aside from the twice-a-week live sessions, every participant receives a fixed <span class="font-medium">1-hour private coaching session</span>, ensuring personalized guidance, while live sessions follow a structured schedule to keep you on track.
+                    </p>
+                </div>
+                
+                <p class="text-lg italic mb-4">
+                    How different would your life feel if you finally had the inner peace you've been looking for?
+                </p>
+                <p class="text-lg italic mb-12">
+                    Don't wait give yourself this gift today
+                </p>
+                
+                <button class="btn-primary text-white px-12 py-4 rounded-full shadow-lg font-medium tracking-wider text-lg relative overflow-hidden group">
+                    <span class="relative z-10">I'm Ready To Start My Journey</span>
+                    <span class="block text-sm mt-2 opacity-70">28th May-July 13th, 2025.</span>
+                    <div class="absolute inset-0 bg-gradient-to-r from-burgundy to-burgundy/80 transform transition-transform duration-300 group-hover:scale-105"></div>
+                    <div class="absolute -inset-px rounded-full border-2 border-white/20"></div>
+                    <div class="absolute bottom-0 left-0 right-0 h-1/3 bg-black/10"></div>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 md:py-28 px-6 container mx-auto relative">
+        <div class="text-center mb-16 scroll-reveal">
+            <h2 class="fluid-title text-4xl md:text-5xl mb-6">
+                Frequently Asked <span class="text-burgundy">Questions</span>
+            </h2>
+        </div>
+
+        <div class="max-w-3xl mx-auto space-y-12">
+            <!-- Question 1 -->
+            <div class="scroll-reveal">
+                <h3 class="text-2xl font-serif mb-4 flex items-center">
+                    <span class="text-burgundy mr-2">1.</span> What happens after I Request for my invitation?
+                </h3>
+                <div class="pl-8">
+                    <p class="mb-4">
+                        Once you secure your invitation, you'll instantly receive <span class="font-medium">"Rewriting Emotions: Harnessing the Power of Art"</span> a guide featuring two powerful exercises designed to help you relieve stress and experience emotional release right away.
+                    </p>
+                    <p>
+                        You'll also gain access to our private Telegram community, where you can connect with like-minded individuals on a similar journey. Most importantly, you'll receive an exclusive link to schedule a private one-on-one talk therapy session an intimate space to express your emotions, gain deeper insights, and explore how this transformative experience aligns with your personal journey.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="scroll-reveal">
+                <h3 class="text-2xl font-serif mb-4 flex items-center">
+                    <span class="text-burgundy mr-2">2.</span> Do I need to buy art supplies?
+                </h3>
+                <div class="pl-8">
+                    <p class="mb-4">You have two options:</p>
+                    <p class="mb-2"><span class="font-medium">A.</span> You can either purchase the art supplies yourself</p>
+                    <p class="mb-4"><span class="font-medium">B.</span> You can opt for a complete art kit to be shipped directly to you within 3-6 days.</p>
+                    <p>
+                        During your 1:1 session included with your invitation, you'll have the opportunity to discuss your preference and receive guidance on the best option for you.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="scroll-reveal">
+                <h3 class="text-2xl font-serif mb-4 flex items-center">
+                    <span class="text-burgundy mr-2">3.</span> I'm not an artist. Can I still join?
+                </h3>
+                <div class="pl-8">
+                    <p>
+                        Absolutely! This experience is designed for everyone, regardless of skill level. You don't need to be an artist to benefit from the healing power of creative expression. The focus is on self-discovery and emotional well-being, not artistic perfection.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="scroll-reveal">
+                <h3 class="text-2xl font-serif mb-4 flex items-center">
+                    <span class="text-burgundy mr-2">4.</span> What if I miss a session?
+                </h3>
+                <div class="pl-8">
+                    <p>
+                        Life happens, and we understand! Each session is recorded and available for replay, so you can catch up at your own pace. Plus, you'll have ongoing access to our community for support and guidance.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="scroll-reveal">
+                <h3 class="text-2xl font-serif mb-4 flex items-center">
+                    <span class="text-burgundy mr-2">5.</span> What if I have a busy schedule?
+                </h3>
+                <div class="pl-8">
+                    <p>
+                        This program is designed for flexibility! You can attend live or watch the replays on your own time. Plus, you'll have ongoing community access for support.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+   
+    <script>
+        // Dark mode detection
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Register ScrollTrigger
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Custom cursor
+            const cursorDot = document.querySelector('.cursor-dot');
+            const cursorOutline = document.querySelector('.cursor-outline');
+            
+            if (window.innerWidth > 768) {
+                window.addEventListener('mousemove', function(e) {
+                    const posX = e.clientX;
+                    const posY = e.clientY;
+                    
+                    cursorDot.style.left = `${posX}px`;
+                    cursorDot.style.top = `${posY}px`;
+                    
+                    // Cursor follows with delay
+                    gsap.to(cursorOutline, {
+                        left: posX,
+                        top: posY,
+                        duration: 0.15
+                    });
+                });
+                
+                // Add hover effects for interactive elements
+                const hoverElements = document.querySelectorAll('a, button, input, textarea');
+                
+                hoverElements.forEach(element => {
+                    element.addEventListener('mouseenter', () => {
+                        cursorOutline.style.width = '60px';
+                        cursorOutline.style.height = '60px';
+                        cursorOutline.style.backgroundColor = 'rgba(180, 82, 82, 0.1)';
+                    });
+                    
+                    element.addEventListener('mouseleave', () => {
+                        cursorOutline.style.width = '40px';
+                        cursorOutline.style.height = '40px';
+                        cursorOutline.style.backgroundColor = 'transparent';
+                    });
+                });
+            }
+            
+            // Text split animation for hero headline
+            const textSplit = document.querySelector('.text-split-animation');
+            
+            if (textSplit) {
+                const spans = textSplit.querySelectorAll('span');
+                
+                spans.forEach((span, index) => {
+                    gsap.to(span, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.8,
+                        delay: 0.2 + (index * 0.15),
+                        ease: "power3.out"
+                    });
+                });
+            }
+            
+            // Scroll reveal animations
+            const scrollElements = document.querySelectorAll('.scroll-reveal');
+            
+            scrollElements.forEach((element) => {
+                gsap.fromTo(
+                    element, 
+                    { 
+                        opacity: 0,
+                        y: 60
+                    },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1,
+                        scrollTrigger: {
+                            trigger: element,
+                            start: "top 85%",
+                            toggleActions: "play none none none"
+                        }
+                    }
+                );
+            });
+            
+            // Fluid shape animations
+            const shapes = document.querySelectorAll('.fluid-shape');
+            
+            shapes.forEach((shape, index) => {
+                // Random movement for each shape
+                gsap.to(shape, {
+                    y: () => Math.random() * 120 - 60,
+                    x: () => Math.random() * 120 - 60,
+                    rotation: () => Math.random() * 10 - 5,
+                    duration: 20,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: "sine.inOut",
+                    delay: index * 1.5
+                });
+                
+                // Parallax effect while scrolling
+                gsap.to(shape, {
+                    y: () => (index % 2 === 0) ? "+=80" : "-=80",
+                    scrollTrigger: {
+                        trigger: "body",
+                        start: "top top",
+                        end: "bottom bottom",
+                        scrub: 1.5
+                    }
+                });
+            });
+            
+            // Image parallax hover effect
+            const imageParallax = document.querySelectorAll('.image-parallax');
+            
+            imageParallax.forEach(image => {
+                image.addEventListener('mousemove', (e) => {
+                    const rect = image.getBoundingClientRect();
+                    const x = (e.clientX - rect.left) / rect.width - 0.5;
+                    const y = (e.clientY - rect.top) / rect.height - 0.5;
+                    
+                    gsap.to(image, {
+                        duration: 0.6,
+                        x: x * 20,
+                        y: y * 20,
+                        ease: "power2.out",
+                        overwrite: true
+                    });
+                });
+                
+                image.addEventListener('mouseleave', () => {
+                    gsap.to(image, {
+                        duration: 1.2,
+                        x: 0,
+                        y: 0,
+                        ease: "elastic.out(1, 0.3)"
+                    });
+                });
+            });
+            
+            // Testimonial card hover effects
+            const testimonialCards = document.querySelectorAll('.testimonial-card');
+            
+            testimonialCards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = (e.clientX - rect.left) / rect.width - 0.5;
+                    const y = (e.clientY - rect.top) / rect.height - 0.5;
+                    
+                    gsap.to(card, {
+                        duration: 0.5,
+                        rotationY: x * 10,
+                        rotationX: -y * 10,
+                        ease: "power2.out",
+                        transformPerspective: 1000,
+                        transformOrigin: "center"
+                    });
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    gsap.to(card, {
+                        duration: 1,
+                        rotationY: 0,
+                        rotationX: 0,
+                        ease: "elastic.out(1, 0.3)"
+                    });
+                });
+            });
+            
+            // Button hover effect
+            const buttons = document.querySelectorAll('.btn-primary');
+            
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', () => {
+                    gsap.to(button, {
+                        scale: 1.05,
+                        duration: 0.3,
+                        ease: "power1.out"
+                    });
+                });
+                
+                button.addEventListener('mouseleave', () => {
+                    gsap.to(button, {
+                        scale: 1,
+                        duration: 0.3,
+                        ease: "power1.out"
+                    });
+                });
+            });
+            
+            // Benefit cards hover effect
+            const benefitCards = document.querySelectorAll('.benefit-card');
+            
+            benefitCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    const cardElement = card.querySelector('.card');
+                    gsap.to(cardElement, {
+                        y: -10,
+                        scale: 1.02,
+                        duration: 0.4,
+                        ease: "power2.out"
+                    });
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    const cardElement = card.querySelector('.card');
+                    gsap.to(cardElement, {
+                        y: 0,
+                        scale: 1,
+                        duration: 0.4,
+                        ease: "power2.out"
+                    });
+                });
+            });
+            
+            // Weekly schedule cards hover effect
+            const weekCards = document.querySelectorAll('.week-card');
+            
+            weekCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    gsap.to(card, {
+                        y: -10,
+                        duration: 0.4,
+                        ease: "power2.out"
+                    });
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    gsap.to(card, {
+                        y: 0,
+                        duration: 0.4,
+                        ease: "power2.out"
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
