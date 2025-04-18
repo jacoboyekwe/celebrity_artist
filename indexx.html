@@ -143,29 +143,14 @@
             box-shadow: 0 20px 40px rgba(180, 82, 82, 0.25);
         }
 
-        /* Standardized button styles for all CTAs */
-        .btn-cta {
-            background: var(--burgundy);
-            color: white;
-            font-weight: 600;
-            border-radius: 8px;
-            transition: all 0.3s ease;
+        .btn-primary {
+            background: var(--primary-color);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
-            border: none;
-            cursor: pointer;
-            padding: 14px 28px;
-            box-shadow: 0 4px 10px rgba(180, 82, 82, 0.3);
-            display: inline-block;
-            text-align: center;
         }
 
-        .btn-cta:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(180, 82, 82, 0.4);
-        }
-
-        .btn-cta::after {
+        .btn-primary::after {
             content: '';
             position: absolute;
             top: 0;
@@ -177,18 +162,23 @@
             transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .btn-cta:hover::after {
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(180, 82, 82, 0.3);
+        }
+
+        .btn-primary:hover::after {
             transform: translateX(100%);
         }
 
-        .dark .btn-cta:hover {
+        .dark .btn-primary:hover {
             box-shadow: 0 10px 20px rgba(180, 82, 82, 0.5);
         }
         
         .scroll-reveal {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .text-split-animation span {
@@ -258,7 +248,7 @@
         /* Pulsing animation for the CTA button */
         @keyframes pulse {
             0% { transform: scale(1); opacity: 0.6; }
-            50% { transform: scale(1.05); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 0.4; }
             100% { transform: scale(1); opacity: 0.6; }
         }
         
@@ -378,17 +368,14 @@
         .guarantee {
             display: flex;
             align-items: center;
-            margin: 30px 0;
+            margin: 40px 0;
             padding: 30px;
-            background-color: #f8f8f8;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            border: 1px solid rgba(180, 82, 82, 0.1);
+            background-color: #f0f0f0;
+            border-radius: 8px;
         }
         
         .dark .guarantee {
             background-color: #2a2a2a;
-            border: 1px solid rgba(180, 82, 82, 0.2);
         }
         
         .badge-container {
@@ -408,7 +395,7 @@
         .guarantee h3 {
             font-size: 28px;
             margin-bottom: 20px;
-            color: var(--burgundy);
+            color: #222;
         }
         
         .dark .guarantee h3 {
@@ -429,49 +416,58 @@
         
         .guarantee-email {
             font-weight: bold;
-            color: var(--burgundy);
+            color: #2a6496;
         }
         
         .cta-container {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 30px;
         }
         
-        /* Enhanced before and after */
+        .cta-button {
+            display: inline-block;
+            background-color: #2a6496;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 18px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .cta-button:hover {
+            background-color: #1d4b75;
+        }
+        
+        /*--Before and after */
         .before-after-container {
             display: flex;
             justify-content: space-between;
-            margin: 30px 0;
-            gap: 20px;
+            margin: 40px 0;
             flex-wrap: wrap;
         }
         
         .before, .after {
             width: 48%;
-            padding: 25px;
+            padding: 20px;
             background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             margin-bottom: 20px;
-            border: 1px solid rgba(180, 82, 82, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .before:hover, .after:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(180, 82, 82, 0.15);
         }
         
         .dark .before, .dark .after {
             background-color: #2a2a2a;
-            border: 1px solid rgba(180, 82, 82, 0.2);
         }
         
         .before h3, .after h3 {
             text-align: center;
-            font-size: 26px;
-            margin: 15px 0;
-            color: var(--burgundy);
+            font-size: 24px;
+            margin: 20px 0;
+            color: #555;
         }
         
         .dark .before h3, .dark .after h3 {
@@ -480,169 +476,205 @@
         
         .section-image {
             width: 100%;
-            height: 220px;
+            height: 200px;
             object-fit: cover;
-            border-radius: 8px;
+            border-radius: 6px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        /* Fast action bonus section styling */
-        .fast-action-bonus {
-            background: linear-gradient(135deg, #fff 0%, #f8f2e8 100%);
-            border-radius: 16px;
-            padding: 30px;
-            margin: 40px 0;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border: 1px solid rgba(180, 82, 82, 0.15);
-        }
-        
-        .dark .fast-action-bonus {
-            background: linear-gradient(135deg, #2a2a2a 0%, #332a1f 100%);
-            border: 1px solid rgba(180, 82, 82, 0.25);
-        }
-        
-        .fast-action-header {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-        
-        .fast-action-title {
-            font-size: 2.2rem;
-            color: var(--burgundy);
-            margin-bottom: 10px;
-        }
-        
-        .fast-action-desc {
-            font-size: 1.2rem;
-            max-width: 700px;
+        /* Base Styles */
+        .program-container {
+            max-width: 1200px;
             margin: 0 auto;
-        }
-        
-        .bonus-card {
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            margin: 20px 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            border: 1px solid rgba(225, 184, 127, 0.3);
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .dark .bonus-card {
-            background: #2d2d2d;
-            border: 1px solid rgba(225, 184, 127, 0.2);
-        }
-        
-        .bonus-title {
-            font-size: 1.4rem;
-            color: var(--burgundy);
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-        
-        .bonus-value {
-            align-self: flex-start;
-            background: rgba(180, 82, 82, 0.1);
-            color: var(--burgundy);
-            font-weight: 700;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-        }
-        
-        .dark .bonus-value {
-            background: rgba(180, 82, 82, 0.2);
-        }
-        
-        .countdown-box {
-            background-color: rgba(180, 82, 82, 0.1);
-            border-radius: 12px;
             padding: 20px;
-            margin: 25px auto;
-            max-width: 500px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .program-section {
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        /* Section 1: Hero */
+        .hero-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
             text-align: center;
-            border: 1px solid rgba(180, 82, 82, 0.2);
+            border: 1px solid #e1e5eb;
         }
         
-        .dark .countdown-box {
-            background-color: rgba(180, 82, 82, 0.2);
-            border: 1px solid rgba(180, 82, 82, 0.3);
+        .dark .hero-section {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+            border: 1px solid #333;
         }
-        
-        .countdown-label {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            font-weight: 500;
-            color: var(--burgundy);
-        }
-        
-        .countdown-timer {
+
+        .section-title {
+            color: #2a6496;
             font-size: 2.5rem;
-            font-weight: 700;
-            margin: 15px 0;
-            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 15px;
         }
         
-        .spots-remaining {
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            font-weight: 600;
+        .dark .section-title {
+            color: #5D9AD6;
         }
-        
-        .main-cta {
-            display: block;
-            background: var(--burgundy);
-            color: white;
-            text-align: center;
-            padding: 18px 30px;
-            border-radius: 8px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin: 25px auto;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            border: none;
-            max-width: 500px;
-            box-shadow: 0 8px 20px rgba(180, 82, 82, 0.25);
-            transition: all 0.3s ease;
-        }
-        
-        .main-cta:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(180, 82, 82, 0.35);
-        }
-        
-        .main-cta .price {
-            display: block;
-            font-size: 0.9rem;
-            margin-top: 5px;
+
+        .section-subtitle {
+            color: #4a6b8a;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
             font-weight: 400;
         }
+        
+        .dark .section-subtitle {
+            color: #A5C1DE;
+        }
 
-        .inspirational-footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 30px 0;
-            background-color: rgba(180, 82, 82, 0.05);
-            border-radius: 10px;
+        /* Section 2: Benefits */
+        .benefits-section {
+            background: #fff9e6;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            border: 1px solid #ffe44d;
         }
         
-        .copyright-footer {
-            text-align: center;
-            padding: 20px 0;
-            font-size: 0.9rem;
-            color: #666;
+        .dark .benefits-section {
+            background: #2a2818;
+            border: 1px solid #665A1F;
+        }
+
+        .benefits-image {
+            width: 45%;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .benefits-content {
+            width: 55%;
+        }
+
+        .highlight-badge {
+            background: #ffe44d;
+            color: #2a2a2a;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 800;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
         }
         
-        .dark .copyright-footer {
-            color: #999;
+        .dark .highlight-badge {
+            background: #665A1F;
+            color: #fff;
+        }
+
+        .bonus-items {
+            margin-top: 20px;
+            padding-left: 20px;
+        }
+
+        .bonus-items li {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.6;
         }
         
+        .dark .bonus-items li {
+            color: #ccc;
+        }
+
+        /* Section 3: Testimonial */
+        .testimonial-section {
+            background: #f8fafc;
+            border: 1px solid #e1e8ed;
+            font-style: italic;
+            color: #555;
+        }
+        
+        .dark .testimonial-section {
+            background: #1f2937;
+            border: 1px solid #374151;
+            color: #ddd;
+        }
+
+        blockquote {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        cite {
+            display: block;
+            margin-top: 15px;
+            font-style: normal;
+            color: #777;
+        }
+        
+        .dark cite {
+            color: #aaa;
+        }
+
+        /* Hover Effects */
+        .cta-button:hover, .main-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .benefits-section {
+                flex-direction: column;
+            }
+            
+            .benefits-image, .benefits-content {
+                width: 100%;
+            }
+            
+            .before, .after {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .program-section {
+                padding: 30px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .countdown-timer {
+                font-size: 2.2rem;
+            }
+            
+            .guarantee {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .badge-container {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .program-section {
+                padding: 25px 20px;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
         /* Pulsing animation for the play button */
         @keyframes pulse {
             0%, 100% {
@@ -695,76 +727,96 @@
             max-height: 500px;
         }
         
-        /* Section spacing adjustments */
-        .section-gap {
-            margin-top: 3rem;
-            margin-bottom: 3rem;
-        }
-        
-        @media (min-width: 768px) {
-            .section-gap {
-                margin-top: 5rem;
-                margin-bottom: 5rem;
-            }
-        }
-        
-        /* Responsive adjustments */
-        @media (max-width: 992px) {
-            .fast-action-bonus {
-                padding: 25px 20px;
-            }
-            
-            .before, .after {
-                width: 100%;
-            }
-            
-            .guarantee {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .badge-container {
-                margin-right: 0;
-                margin-bottom: 20px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .countdown-timer {
-                font-size: 2.2rem;
-            }
-            
-            .fast-action-title {
-                font-size: 1.8rem;
-            }
-            
-            .bonus-title {
-                font-size: 1.2rem;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .fast-action-bonus {
-                padding: 20px 15px;
-            }
-            
-            .countdown-timer {
-                font-size: 1.8rem;
-            }
-            
-            .bonus-card {
-                padding: 20px 15px;
-            }
-        }
-        
         /* Dark mode styles */
         @media (prefers-color-scheme: dark) {
             .video-placeholder {
                 background-color: #111;
             }
         }
+
+        /* Countdown styles */
+        .countdown-box {
+            background-color: rgba(180, 82, 82, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px auto;
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        .dark .countdown-box {
+            background-color: rgba(180, 82, 82, 0.2);
+        }
+        
+        .countdown-label {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .countdown-timer {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 15px 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .spots-remaining {
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .main-cta {
+            display: block;
+            background: var(--burgundy);
+            color: white;
+            text-align: center;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0 auto;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            max-width: 500px;
+        }
+        
+        .main-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(180, 82, 82, 0.3);
+        }
+        
+        .main-cta .price {
+            display: block;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            font-weight: 400;
+        }
+
+        .inspirational-footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px 0;
+            background-color: rgba(180, 82, 82, 0.05);
+            border-radius: 10px;
+        }
+        
+        .copyright-footer {
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .dark .copyright-footer {
+            color: #999;
+        }
     </style>
 </head>
+
 
 <body class="bg-white text-gray-800 relative" id="top">
     <!-- Navigation -->
@@ -775,13 +827,13 @@
     </nav>
 
     <!-- Hero Section -->
-    <header class="container mx-auto pt-16 md:pt-24 pb-12 md:pb-20 px-6 md:px-20 relative overflow-hidden">
-        <div class="flex justify-center items-center">
-            <div class="scroll-reveal text-center max-w-3xl">
+    <header class="container mx-auto pt-24 md:pt-32 pb-20 md:pb-28 px-6 md:px-20 relative overflow-hidden">
+        <div class="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+            <div class="scroll-reveal">
                 <h1 class="text-split-animation">
                     <span class="art-title text-sm text-burgundy block mb-2">Creative Expression</span>
                     <span class="fluid-title text-5xl md:text-7xl mb-6 block">
-                        Release <span class="text-burgundy relative">
+                        Release  <span class="text-burgundy relative">
                             Stress
                             <svg class="absolute -bottom-1 left-0 w-full h-2 text-burgundy opacity-20" viewBox="0 0 200 9" fill="none">
                                 <path d="M0 4.5C50 -1.5 150 -1.5 200 4.5" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
@@ -790,20 +842,24 @@
                         & Escape the 9 - 5 Grind
                     </span>
                 </h1>
-                <p class="text-lg md:text-xl mb-10 mx-auto font-light opacity-90">
+                <p class="text-lg md:text-xl mb-10 max-w-xl font-light opacity-90">
                     Without changing your schedule or leaving the comfort of your home.
                 </p>
-                <div class="flex justify-center">
-                    <button class="btn-cta animate-pulse text-white px-8 py-3 text-lg font-medium tracking-wider scroll-to-cta">
-                        Start Your Journey Now
-                    </button>
+                <button class="btn-primary text-white px-8 py-3 rounded-full shadow-lg font-light tracking-wider scroll-to-cta">
+                    Start Your Journey Now
+                </button>
+            </div>
+            <div class="scroll-reveal relative">
+                <div class="relative overflow-hidden rounded-2xl shadow-2xl">
+                    <img src="https://pfst.cf2.poecdn.net/base/image/8992412a64504b0dff3f0f0f56f7d05bc561fc877f0da3df2cecec52a9360119?w=875&h=1080" alt="Creative healing journey" class="w-full h-auto object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-burgundy/30 to-transparent opacity-40"></div>
                 </div>
             </div>
         </div>
     </header>
 
     <!--Video #1-->
-    <div class="video-container mt-6 mb-10">
+    <div class="video-container mt-8">
         <div class="video-placeholder cinematic-overlay" data-video-id="aTJeCB94SMw">
             <!-- Using a thumbnail from the YouTube video -->
             <div class="absolute inset-0 bg-cover bg-center" style="position: absolute; inset: 0; background-size: cover; background-position: center; background-image: url('https://i.ytimg.com/vi/aTJeCB94SMw/maxresdefault.jpg');"></div>
@@ -824,27 +880,25 @@
         </div>
     </div>
 
-    <!-- First Countdown Section -->
-    <section id="first-countdown" class="container mx-auto px-6 section-gap">
-            
-            <button class="main-cta scroll-to-cta mt-8">
-                Start Your Journey Now!
-                <span class="price">Request your Exclusive Invitation for $72</span>
-            </button>
-            
-            <div class="countdown-box">
-                <div class="countdown-label">Journey Starts In:</div>
-                <div class="countdown-timer">
-                    <span id="days">00</span>:<span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
-                </div>
-                <div class="spots-remaining">SECURE YOUR HEALING & CREATIVE EXPERIENCE</div>
+    <!-- Countdown #1-->
+     <div id="fast-action" class="my-16 container mx-auto px-6">
+        <button class="main-cta scroll-to-cta">Start your journey Now!
+            <span class="price">Request your Exclusive Invitation for $72</span>
+        </button>
+        
+        <div class="countdown-box">
+            <div class="countdown-label">Journey Starts In:</div>
+            <div class="countdown-timer">
+                <span id="days">00</span>:<span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
             </div>
+            <div class="spots-remaining">SECURE YOUR HEALING & CREATIVE EXPERIENCE</div>
         </div>
-    </section>
+     </div>
+
 
      <!-- Testimonials Section -->
-     <section class="py-12 md:py-16 px-6 container mx-auto relative">
-        <div class="text-center mb-10 scroll-reveal">
+     <section class="py-16 md:py-28 px-6 container mx-auto relative">
+        <div class="text-center mb-16 scroll-reveal">
             <h2 class="fluid-title text-4xl md:text-5xl mb-6">
                 What Our <span class="text-burgundy">participants Say</span>
             </h2>
@@ -958,8 +1012,8 @@
     </section>
 
     <!-- Over the Next 6 weeks Section -->
-    <section class="py-12 md:py-16 px-6 container mx-auto relative bg-burgundy/5 rounded-3xl">
-        <div class="text-center mb-12 scroll-reveal">
+    <section class="py-16 md:py-24 px-6 container mx-auto relative bg-burgundy/5 rounded-3xl">
+        <div class="text-center mb-16 scroll-reveal">
             <h2 class="fluid-title text-4xl md:text-5xl mb-6">
                 Over the Next 6 Weeks, <span class="text-burgundy">You'll Step Into One-of-a-Kind Art Experience for Deep Emotional Renewal</span>
             </h2>
@@ -1027,9 +1081,10 @@
         </div>
     </section>
 
+
       <!-- Weekly Schedule Section -->
-      <section class="py-12 md:py-16 px-6 container mx-auto relative">
-        <div class="text-center mb-12 scroll-reveal">
+      <section class="py-16 md:py-28 px-6 container mx-auto relative">
+        <div class="text-center mb-16 scroll-reveal">
             <span class="art-title text-sm text-burgundy block mb-2">Program Overview</span>
             <h2 class="fluid-title text-4xl md:text-5xl mb-6">
                 Your Weekly <span class="text-burgundy">Schedule</span>
@@ -1160,26 +1215,24 @@
                 </div>
             </div>
         </div>
-    
-        </div>
     </section>
 
     <!-- Truth Section -->
-    <section class="py-12 md:py-16 px-6 container mx-auto relative">
-        <div class="text-center mb-12 scroll-reveal">
+    <section class="py-16 md:py-24 px-6 container mx-auto relative">
+        <div class="text-center mb-16 scroll-reveal">
             <h2 class="fluid-title text-4xl md:text-5xl mb-6">
                 The Truth <span class="text-burgundy">Is...</span>
             </h2>
-            <p class="text-lg md:text-xl mb-6 max-w-3xl mx-auto">
+            <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto">
                 Stress holds you back from thinking clearly, performing at your best, and fully enjoying life. But it doesn't have to be that way.
             </p>
-            <p class="text-lg md:text-xl mb-6 max-w-3xl mx-auto">
+            <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto">
                 According to the <span class="font-medium">American Psychological Association</span>, creative expression through art is a powerful way to manage stress, release emotional tension, and restore balance.
             </p>
-            <p class="text-lg md:text-xl mb-6 max-w-3xl mx-auto">
+            <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto">
                 Those who embrace this journey experience greater clarity, resilience, and a deeper connection to themselves.
             </p>
-            <p class="text-lg md:text-xl mb-6 max-w-3xl mx-auto">
+            <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto">
                 Follow this program and in just six weeks, you'll feel emotionally balanced, mentally clear, and fully in control. As stress fades, your ability to think, solve problems, and perform at your best will thrive.
             </p>
         </div>
@@ -1188,9 +1241,8 @@
                 Because art isn't just about creativity, it's about renewal.
             </p>
         </div>
-        
-        <!-- Quote Section -->
-        <div class="py-10 container mx-auto relative">
+            <!-- Quote Section -->
+        <section class="py-16 md:py-24 px-6 container mx-auto relative">
             <div class="scroll-reveal text-center max-w-3xl mx-auto">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto mb-6 text-burgundy opacity-30" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
@@ -1200,42 +1252,36 @@
                 </p>
                 <p class="text-lg font-medium text-burgundy">Pablo Picasso</p>
             </div>
-        </div>
+        </section>
     </section>
 
     <!-- No Secret Section -->
-    <section class="py-12 md:py-16 px-6 container mx-auto relative bg-burgundy/5 rounded-3xl">
-        <div class="text-center mb-12 scroll-reveal">
+    <section class="py-16 md:py-24 px-6 container mx-auto relative bg-burgundy/5 rounded-3xl">
+        <div class="text-center mb-16 scroll-reveal">
             <h2 class="fluid-title text-4xl md:text-5xl mb-6">
                 It's No <span class="text-burgundy">Secret...</span>
             </h2>
-            <p class="text-lg md:text-xl mb-6 max-w-3xl mx-auto">
+            <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto">
                 Stress can strain relationships, make parenting harder, and even affect your job.
             </p>
-            <p class="text-lg md:text-xl mb-6 max-w-3xl mx-auto">
+            <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto">
                 But when you learn to manage it (and in the way I'll be guiding you on this journey), you'll always show up as your best self:
             </p>
             <p class="text-2xl md:text-xl text-burgundy font-serif mb-4">
                 Calm, Clear, and in Control
-            </p>
+            
             <p class="text-lg md:text-xl max-w-3xl mx-auto">
                 in your work, your relationships, and your life.
             </p>
-            
-            <div class="flex justify-center mt-10">
-                <button class="btn-cta scroll-to-cta">
-                    Join Now
-                </button>
-            </div>
         </div>
     </section>
 
     <!-- Artist Introduction Section -->
-    <section class="py-12 md:py-16 px-6 container mx-auto relative">
+    <section class="py-16 md:py-28 px-6 container mx-auto relative">
         <div class="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
             <div class="scroll-reveal relative">
                 <div class="relative overflow-hidden rounded-2xl shadow-2xl">
-                    <img src="./images/jacob1.jpg" alt="Jacob Oyekwe - The Celebrity Artist" class="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700 ease-in-out">
+                    <img src="https://pfst.cf2.poecdn.net/base/image/8992412a64504b0dff3f0f0f56f7d05bc561fc877f0da3df2cecec52a9360119?w=875&h=1080" alt="Jacob Oyekwe - The Celebrity Artist" class="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700 ease-in-out">
                 </div>
             </div>
             <div class="scroll-reveal">
@@ -1270,17 +1316,17 @@
     </section>
 
         <!-- Who This Journey Is For Section -->
-        <section class="py-12 md:py-16 px-6 container mx-auto relative bg-gradient-to-b from-transparent to-burgundy/5 rounded-3xl">
-            <div class="text-center mb-12 scroll-reveal">
-                <h2 class="fluid-title text-3xl md:text-4xl mb-6">
+        <section class="py-16 md:py-28 px-6 container mx-auto relative bg-gradient-to-b from-transparent to-burgundy/5 rounded-3xl">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="fluid-title text-4xl md:text-5xl mb-6">
                     To help you decide, and without wasting time, let's dive into the mindset, <br class="hidden md:block"> needs, and goals of those this journey was designed for.
                 </h2>
             </div>
     
-            <div class="space-y-10 md:space-y-16 max-w-4xl mx-auto">
+            <div class="space-y-12 md:space-y-20 max-w-4xl mx-auto">
                 <!-- Peace and Emotional Release -->
                 <div class="scroll-reveal">
-                    <h3 class="text-2xl md:text-3xl text-center mb-6 font-serif text-burgundy">
+                    <h3 class="text-3xl md:text-4xl text-center mb-8 font-serif text-burgundy">
                         IF YOU WANT PEACE AND EMOTIONAL RELEASE
                     </h3>
                     <p class="text-lg md:text-xl text-center">
@@ -1291,7 +1337,7 @@
     
                 <!-- Relief, Expression and Fulfillment -->
                 <div class="scroll-reveal">  
-                    <h3 class="text-2xl md:text-3xl text-center mb-6 font-serif text-burgundy">
+                    <h3 class="text-3xl md:text-4xl text-center mb-8 font-serif text-burgundy">
                         IF YOU WANT RELIEF, EXPRESSION AND FULFILLMENT
                     </h3>
                     <p class="text-lg md:text-xl text-center">
@@ -1302,7 +1348,7 @@
     
                 <!-- Feel Inspired, Unstoppable and Renewed -->
                 <div class="scroll-reveal">
-                    <h3 class="text-2xl md:text-3xl text-center mb-6 font-serif text-burgundy">
+                    <h3 class="text-3xl md:text-4xl text-center mb-8 font-serif text-burgundy">
                         IF YOU WANT TO FEEL INSPIRED, UNSTOPPABLE AND RENEWED
                     </h3>
                     <p class="text-lg md:text-xl text-center">
@@ -1312,7 +1358,7 @@
                 </div>
             </div>
     
-            <div class="mt-16 bg-burgundy text-white py-10 px-6 rounded-xl text-center">
+            <div class="mt-20 bg-burgundy text-white py-10 px-6 rounded-xl text-center">
                 <h3 class="text-2xl md:text-3xl mb-4 font-serif">
                     If none of that disqualifies you, keep reading.
                 </h3>
@@ -1320,16 +1366,10 @@
                     This could be the most life-changing experience you'll ever have.
                 </p>
             </div>
-            
-            <div class="flex justify-center mt-12">
-                <button class="btn-cta scroll-to-cta">
-                    Request Your Invitation
-                </button>
-            </div>
         </section>
 
     <!-- Artist Bio Section -->
-    <section class="py-12 md:py-16 px-6 container mx-auto relative bg-burgundy/5 rounded-3xl">
+    <section class="py-16 md:py-28 px-6 container mx-auto relative bg-burgundy/5 rounded-3xl">
         <div class="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
             <div class="scroll-reveal order-2 md:order-1">
                 <h2 class="fluid-title text-3xl md:text-5xl mb-4">
@@ -1356,14 +1396,14 @@
             </div>
             <div class="scroll-reveal relative order-1 md:order-2">
                 <div class="relative overflow-hidden rounded-2xl shadow-2xl">
-                    <img src="/images/jacob2.jpg" alt="Jacob Oyekwe Portrait" class="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700 ease-in-out">
+                    <img src="https://pfst.cf2.poecdn.net/base/image/8992412a64504b0dff3f0f0f56f7d05bc561fc877f0da3df2cecec52a9360119?w=875&h=1080" alt="Jacob Oyekwe Portrait" class="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700 ease-in-out">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Before and After Section-->
-     <div class="py-12 md:py-16 px-6 container mx-auto">
+     <div class="py-16 md:py-24 px-6 container mx-auto">
         <div class="text-center mb-12">
             <h2 class="fluid-title text-3xl md:text-4xl mb-4">Ready to embrace a life where stress no longer holds you back?</h2>
             <h2 class="fluid-title text-2xl md:text-3xl mb-8">This is What You Can Expect From The<br>"Art for the Soul: 6 weeks of creative Healing Experience"</h2>
@@ -1371,114 +1411,31 @@
         
         <div class="before-after-container">
             <div class="before">
-                <img src="./images/frustrated.jpg" alt="Person feeling frustrated before the experience" class="section-image">
+                <img src="https://images.unsplash.com/photo-1456406644174-8ddd4cd52a06?q=80&w=1776&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Person feeling frustrated before the experience" class="section-image">
                 <h3>Before Your Art for the Soul Experience</h3>
-
-                <div class="flex items-start space-x-4">
-                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-red-500 flex items-center justify-center mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                    <p class="text-lg">Waking up exhausted, even after a full night's sleep, because your mind never truly shuts off.</p>
-                </div>
-
-                <div class="flex items-start space-x-4">
-                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-red-500 flex items-center justify-center mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                    <p class="text-lg">Carrying work stress home, making it hard to relax or enjoy time with family.</p>
-                </div>
-
-                
-                <div class="flex items-start space-x-4">
-                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-red-500 flex items-center justify-center mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                    <p class="text-lg">Feeling mentally drained by constant deadlines and pressure, leaving little energy for yourself.
-                    </p>
-                </div>
-
-                
-                <div class="flex items-start space-x-4">
-                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-red-500 flex items-center justify-center mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                    <p class="text-lg">Struggling with anxiety or tension headaches, yet pushing through because there's no time to slow .</p>
-                </div>
-
-                <div class="flex items-start space-x-4">
-                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-red-500 flex items-center justify-center mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                    <p class="text-lg"> Losing patience easily, whether in meetings, with coworkers, or at home.</p>
-                </div>
+                <p>Waking up exhausted, even after a full night's sleep, becuase your mind never truly shuts off.</p>
+                <p>Carrying work stress home, making it hard to relax or enjoy time with family.</p>
+                <p>Feeling mentally drained by constant deadlines and pressure, leaving little energy for yourself.</p>
+                <p>Struggling with anxiety or tension headaches, yet pushing through because there's no time to slow down.</p>
+                <p>Losing patience easily, whether in meetings, with coworkers, or at home.
             </div>
-
+            
             <div class="after">
-                <img src="./images/happy.jpg" alt="Person feeling happy after the experience" class="section-image">
+                <img src="https://images.unsplash.com/photo-1531747056595-07f6cbbe10ad?q=80&w=1769&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Person feeling happy after the experience" class="section-image">
                 <h3>After Your Art for the Soul Experience</h3>
-
-                <div class="flex items-start space-x-4">
-                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                    <p class="text-lg">You no longer carry the weight of work stress home with you.</p>
-                </div>
-
-                <div class="flex items-start space-x-4">
-                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                    <p class="text-lg">Your mind feels clearer, lighter, and more in control.</p>
-                </div>
-                                
-                <div class="flex items-start space-x-4">
-                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                    <p class="text-lg">You have a clear roadmap of activities to turn to when stress feels overwhelming.</p>
-                </div>
-                           
-                <div class="flex items-start space-x-4">
-                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                    <p class="text-lg"> You sleep deeper and wake up feeling refreshed.</p>
-                </div>
-
-                <div class="flex items-start space-x-4">
-                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                    <p class="text-lg"> You feel more present and engaged in your personal life.</p>
-                </div>
+                <p>You no longer carry the weight of work stress home with you.</p>
+                <p>Your mind feels clearer, lighter, and more in control.</p>
+                <p>You have a clear roadmap of activities to turn to when stress feels overwhelming.</p>
+                <p> You sleep deeper and wake up feeling refreshed.</p>
+                <p> You feel more present and engaged in your personal life.</p>
             </div>
         </div>
     </div>
 
     <!-- Guarantee Section -->
-    <div class="guarantee container mx-auto px-6 my-12">
+    <div class="guarantee container mx-auto px-6 my-16">
         <div class="badge-container">
-            <img src="./images/moneyback.png" alt="100% Money Back Guarantee Badge" class="guarantee-badge">
+            <img src="https://images.unsplash.com/photo-1611690828081-03298ec9f8a2?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3" alt="100% Money Back Guarantee Badge" class="guarantee-badge">
         </div>
         <div class="guarantee-content">
             <h3>My Promise to You - 100% Transformation Guarantee</h3>
@@ -1492,7 +1449,7 @@
                 <p>Not giving yourself this chance.</p>
             </div>
             <div class="cta-container">
-                <button id="journeyBtn" class="btn-cta scroll-to-cta">Start Your Journey Now!</button>
+                <button id="journeyBtn" class="cta-button scroll-to-cta">Start Your Journey Now!</button>
             </div>
         </div>
     </div>
@@ -1504,7 +1461,7 @@
     </div>
 
         <!-- Request Your Invitation Section -->
-        <section class="py-12 md:py-16 px-6 container mx-auto relative">
+        <section class="py-16 md:py-28 px-6 container mx-auto relative">
             <div class="text-center mb-12 scroll-reveal">
                 <h2 class="fluid-title text-4xl md:text-5xl mb-6">
                     Request Your Invitation <span class="text-burgundy">to</span>
@@ -1620,26 +1577,27 @@
                             Aside from the twice-a-week live sessions, every participant receives a fixed <span class="font-medium">1-hour private coaching session</span>, ensuring personalized guidance, while live sessions follow a structured schedule to keep you on track.
                         </p>
                     </div>
-                    </div>
+                    
+
                 </div>
             </div>
         </section>
 
     <!-- Why Request an Invitation Section -->
-    <section class="py-12 md:py-16 px-6 container mx-auto relative bg-burgundy/10 rounded-3xl my-10">
-        <div class="text-center mb-12 scroll-reveal">
+    <section class="py-16 md:py-24 px-6 container mx-auto relative bg-burgundy/10 rounded-3xl my-12">
+        <div class="text-center mb-16 scroll-reveal">
             <h2 class="fluid-title text-4xl md:text-5xl mb-8">
                 Why Do I Need to Request an <span class="text-burgundy">Invitation?</span>
             </h2>
             <div class="max-w-3xl mx-auto">
-                <p class="text-lg md:text-xl mb-6">
+                <p class="text-lg md:text-xl mb-8">
                     As earlier mentioned, this isn't just a program, it's a deeply personal and transformative journey.
                 </p>
-                <p class="text-lg md:text-xl mb-6">
+                <p class="text-lg md:text-xl mb-8">
                     To maintain an intimate and meaningful experience, participation is by invitation only.
                     This ensures that every member is truly committed to their growth, making the experience more powerful and rewarding for all involved.
                 </p>
-                <p class="text-lg md:text-xl mb-8">
+                <p class="text-lg md:text-xl mb-10">
                     Most importantly, your invitation includes a 1:1 session to explore your needs and ensure this journey is the right fit for you.
                 </p>
             </div>
@@ -1675,37 +1633,33 @@
                     <p class="text-lg">Make sure this is the right path for your growth and healing.</p>
                 </div>
             </div>
-            </div>
         </div>
     </section>
     
     <!-- The Hidden Cost Section -->
-    <section class="py-12 md:py-16 px-6 container mx-auto relative">
-        <div class="text-center mb-12 scroll-reveal">
+    <section class="py-16 md:py-28 px-6 container mx-auto relative">
+        <div class="text-center mb-16 scroll-reveal">
             <h2 class="fluid-title text-4xl md:text-5xl mb-6">
                 The Hidden Cost of <span class="text-burgundy">Ignoring Your Well-Being</span>
             </h2>
         </div>
-        <div class="card p-8 md:p-12 rounded-2xl max-w-4xl mx-auto scroll-reveal shadow-lg">
-            <p class="text-lg md:text-xl mb-6">
+        <div class="card p-10 md:p-16 rounded-2xl max-w-4xl mx-auto scroll-reveal">
+            <p class="text-lg md:text-xl mb-8">
                 Stress doesn't just disappear, it builds up, silently affecting your mind, body, and daily life. If you keep pushing through without an outlet, your sleep suffers, your energy drops, and your work and relationships start to feel like obligations instead of joys.
             </p>
-            <p class="text-lg md:text-xl mb-6">
+            <p class="text-lg md:text-xl mb-8">
                 Right now, you may think, "I'll handle it later." But later turns into months, even years, of feeling overwhelmed. With structured yet flexible sessions twice a week, you'll have a space to release stress, regain clarity, and reconnect with the part of you that feels focused, creative, and in control.
             </p>
-            
         </div>
     </section>
 
    <!-- 2nd-Testimonials Section -->
-   <section class="py-12 md:py-16 px-6 container mx-auto relative">
-    <div class="text-center mb-12 scroll-reveal">
-        <h2 class="fluid-title text-4xl md:text-5xl mb-6">
-            More <span class="text-burgundy">Success Stories</span>
-        </h2>
+   <section class="py-16 md:py-28 px-6 container mx-auto relative">
+    <div class="text-center mb-16 scroll-reveal">
     </div>
 
     <div class="grid md:grid-cols-3 gap-8 md:gap-10">
+        <!-- Testimonial 4 -->
         <div class="card hover:border-burgundy/30 p-8 rounded-xl scroll-reveal">
             <!-- 5 Star Rating -->
             <div class="flex mb-4 text-yellow-400">
@@ -1724,6 +1678,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.799-2.034c-.784-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
+                <span class="ml-2 text-gray-600 dark:text-gray-300">5.0</span>
             </div>
 
             <p class="text-gray-600 dark:text-gray-300 mb-6">
@@ -1731,7 +1686,7 @@
             </p>
             
             <div class="flex items-center">
-                <img src="/images/testimonial-4.png" alt="Emily R." class="w-12 h-12 rounded-full object-cover">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Emily R." class="w-12 h-12 rounded-full object-cover">
                 <div class="ml-4">
                     <h4 class="font-medium">Nelotechie.</h4>
                 </div>
@@ -1740,6 +1695,7 @@
 
         <!-- Testimonial 5 -->
         <div class="card hover:border-burgundy/30 p-8 rounded-xl scroll-reveal">
+            <!-- 5 Star Rating -->
             <div class="flex mb-4 text-yellow-400">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.799-2.034c-.784-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -1756,6 +1712,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.799-2.034c-.784-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
+                <span class="ml-2 text-gray-600 dark:text-gray-300">5.0</span>
             </div>
 
             <p class="text-gray-600 dark:text-gray-300 mb-6">
@@ -1763,7 +1720,7 @@
             </p>
             
             <div class="flex items-center">
-                <img src="/images/testimonial-5.jpg" alt="Chawa S." class="w-12 h-12 rounded-full object-cover">
+                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Chawa S." class="w-12 h-12 rounded-full object-cover">
                 <div class="ml-4">
                     <h4 class="font-medium">Chawa Setimala.</h4>
                 </div>
@@ -1772,6 +1729,7 @@
 
         <!-- Testimonial 6 -->
         <div class="card hover:border-burgundy/30 p-8 rounded-xl scroll-reveal">
+            <!-- 4.5 Star Rating -->
             <div class="flex mb-4 text-yellow-400">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.799-2.034c-.784-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -1795,57 +1753,73 @@
             </p>
             
             <div class="flex items-center">
-                <img src="/images/testimonial-6.jpg" alt="Sophia K." class="w-12 h-12 rounded-full object-cover">
+                <img src="https://images.unsplash.com/photo-1531384441138-2736e62e0919?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Sophia K." class="w-12 h-12 rounded-full object-cover">
                 <div class="ml-4">
                     <h4 class="font-medium">Chiamaka Chimaluma</h4>
                 </div>
             </div>
         </div>
     </div>
-    
 </section>
 
-<!-- Fast Action Bonus Section -->
-<section id="fast-action" class="container mx-auto px-6 section-gap">
-    <div class="fast-action-bonus">
-        <div class="fast-action-header">
-            <h2 class="fast-action-title">Imagine How Different You Would Feel In Just 6 Weeks</h2>
-            <p class="fast-action-desc">Join The Experience and Start Your Journey</p>
-        </div>
-    
-        <img src="./images/price&services.png">
-        <div class="grid md:grid-cols-2 gap-6 mt-8">
-            <div class="bonus-card">
-                <h3 class="bonus-title">Personalized Emotion Tracking Portrait</h3>
-                <p>A visual reflection of your emotional journey captured in two hand-drawn portraits: one at the start of your healing process and another after six weeks of creative growth.</p>
+<!-- Fast action bonus section-->
+<section id="fast-action" class="program-container">
+    <!-- Section 1: Hero -->
+    <div class="program-section hero-section">
+        <h1 class="section-title">Imagine How Different You Would Feel In Just 6 Weeks</h1>
+        <h2 class="section-subtitle">Join The Experience and Start Your Journey</h2>
+        <h2 class="section-subtitle">Request your invitation Now!</h2>
+    </div>
+
+    <!-- Section 2: What You Get -->
+    <img src="https://images.unsplash.com/photo-1643120219894-97c94202d9e7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Program Benefits" class="benefits-image my-8">
+
+    <!-- section 3: Exclusive Fast-Action Bonus-->
+    <div class="program-section benefits-section">
+        <div class="benefits-content">
+            <div class="highlight-badge">Exclusive Fast-Action Bonus</div>
+            <div class="bonus-details">
+                <p>(Only for the First 7 Enrollments within the Next 24hrs)</p>
+                <ul class="bonus-items">
+                    <li>Personalized Emotion Tracking Portrait</li>
+                    <p> A visual reflection of your emotional journey captured in two hand-drawn portraits: one at the start of your healing process
+                        and another after six weeks of creative growth.
+                    </p>
+                    <li>Flexible 1-on-1 Coaching Session During the 6-Week Experience</li>
+                    <p>Fast action takers get the freedom to choose when to have their 1:1 private coaching session, making 
+                        it easier to fit into their schedule ($300 Value - FREE!)
+                    </p>
+                </ul>
             </div>
-            
-            <div class="bonus-card">
-                <h3 class="bonus-title">Flexible 1-on-1 Coaching Session During the 6-Week Experience </h3>
-                <span class="bonus-value">$300 Value - FREE</span>
-                <p>Fast action takers get the freedom to choose when to have their 1:1 private coaching session, making it easier to fit into their schedule.</p>
-            </div>
         </div>
-        
-        <button class="main-cta scroll-to-cta mt-8">
-            Start Your Journey Now!
+    </div>
+
+    <!-- Section 4: Countdown CTA -->
+    <!-- Countdown #2-->
+    <div>
+        <button class="main-cta scroll-to-cta">Start your journey Now!
             <span class="price">Request your Exclusive Invitation for $72</span>
         </button>
         
         <div class="countdown-box">
             <div class="countdown-label">Journey Starts In:</div>
             <div class="countdown-timer">
-                <span id="days">00</span>:<span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
+                <span id="countdown-days">00</span>:<span id="countdown-hours">00</span>:<span id="countdown-minutes">00</span>:<span id="countdown-seconds">00</span>
             </div>
-            <div class="spots-remaining">SECURE YOUR HEALING & CREATIVE EXPERIENCE - ONLY 5 SPOTS LEFT</div>
+            <div class="spots-remaining">SECURE YOUR HEALING & CREATIVE EXPERIENCE</div>
         </div>
+     </div>
+
     </div>
 </section>
 
 
+
+
+
 <!-- Moments like this could be yours Section -->
-    <div class="container mx-auto py-12 px-6">
-        <div class="text-center mb-12">
+    <div class="container mx-auto py-16 px-6">
+        <div class="text-center mb-16">
             <h2 class="fluid-title text-4xl md:text-5xl mb-6">
                  <span class="text-burgundy">MOMENTS LIKE THIS COULD BE YOURS</span>
             </h2>
@@ -1871,19 +1845,18 @@
                     </div>
                 </div>
             </div>
-            
         </div>
     </div>
 
     <!-- FAQ Section -->
-    <section class="py-12 md:py-16 px-6 container mx-auto relative">
-        <div class="text-center mb-12 scroll-reveal">
+    <section class="py-16 md:py-28 px-6 container mx-auto relative">
+        <div class="text-center mb-16 scroll-reveal">
             <h2 class="fluid-title text-4xl md:text-5xl mb-6">
                 Frequently Asked <span class="text-burgundy">Questions</span>
             </h2>
         </div>
 
-        <div class="max-w-3xl mx-auto space-y-8">
+        <div class="max-w-3xl mx-auto space-y-12">
             <!-- Question 1 -->
             <div class="scroll-reveal">
                 <h3 class="text-2xl font-serif mb-4 flex items-center faq-question active">
@@ -1956,21 +1929,24 @@
     </section>
    
     <!-- Extra section-->
-     <div class="text-center container mx-auto px-6 py-12">
+     <div class="text-center container mx-auto px-6 py-16">
         <p class="text-lg italic mb-4">
             How different would your life feel if you finally had the inner peace you've been looking for?
         </p>
-        <p class="text-lg italic mb-10">
+        <p class="text-lg italic mb-12">
             Don't wait give yourself this gift today
         </p>
         
-        <button class="btn-cta px-12 py-4 text-lg scroll-to-cta">
+        <button class="btn-primary text-white px-12 py-4 rounded-full shadow-lg font-medium tracking-wider text-lg relative overflow-hidden group scroll-to-cta">
             <span class="relative z-10">I'm Ready To Start My Journey</span>
             <span class="block text-sm mt-2">28th May-July 13th, 2025.</span>
+            <div class="absolute inset-0 bg-gradient-to-r from-burgundy to-burgundy/80 transform transition-transform duration-300 group-hover:scale-105"></div>
+            <div class="absolute -inset-px rounded-full border-2 border-white/20"></div>
+            <div class="absolute bottom-0 left-0 right-0 h-1/3 bg-black/10"></div>
         </button>
      </div>
 
-    <!-- New inspirational footer -->
+         <!-- New inspirational footer -->
     <div class="inspirational-footer">
         <p>If something inside you is telling you this is what you need, trust it. Your intuition is rarely wrong.</p>
         <p>Take the first step. Your journey starts here.</p>
@@ -2056,6 +2032,50 @@
             // Register ScrollTrigger
             gsap.registerPlugin(ScrollTrigger);
             
+            // Custom cursor
+            const cursorDot = document.querySelector('.cursor-dot');
+            const cursorOutline = document.querySelector('.cursor-outline');
+            
+            if (window.innerWidth > 768) {
+                window.addEventListener('mousemove', function(e) {
+                    const posX = e.clientX;
+                    const posY = e.clientY;
+                    
+                    if (cursorDot) {
+                        cursorDot.style.left = `${posX}px`;
+                        cursorDot.style.top = `${posY}px`;
+                    }
+                    
+                    // Cursor follows with delay
+                    if (cursorOutline) {
+                        gsap.to(cursorOutline, {
+                            left: posX,
+                            top: posY,
+                            duration: 0.15
+                        });
+                    }
+                });
+                
+                // Add hover effects for interactive elements
+                const hoverElements = document.querySelectorAll('a, button, input, textarea');
+                
+                if (cursorOutline) {
+                    hoverElements.forEach(element => {
+                        element.addEventListener('mouseenter', () => {
+                            cursorOutline.style.width = '60px';
+                            cursorOutline.style.height = '60px';
+                            cursorOutline.style.backgroundColor = 'rgba(180, 82, 82, 0.1)';
+                        });
+                        
+                        element.addEventListener('mouseleave', () => {
+                            cursorOutline.style.width = '40px';
+                            cursorOutline.style.height = '40px';
+                            cursorOutline.style.backgroundColor = 'transparent';
+                        });
+                    });
+                }
+            }
+            
             // Text split animation for hero headline
             const textSplit = document.querySelector('.text-split-animation');
             
@@ -2066,14 +2086,14 @@
                     gsap.to(span, {
                         opacity: 1,
                         y: 0,
-                        duration: 0.2,
-                        delay: 0.05 + (index * 0.1),
+                        duration: 0.8,
+                        delay: 0.2 + (index * 0.15),
                         ease: "power3.out"
                     });
                 });
             }
             
-            // Scroll reveal animations with reduced delay
+            // Scroll reveal animations
             const scrollElements = document.querySelectorAll('.scroll-reveal');
             
             scrollElements.forEach((element) => {
@@ -2081,39 +2101,153 @@
                     element, 
                     { 
                         opacity: 0,
-                        y: 30
+                        y: 60
                     },
                     {
                         opacity: 1,
                         y: 0,
-                        duration: 0.4,
+                        duration: 1,
                         scrollTrigger: {
                             trigger: element,
-                            start: "top 90%",
+                            start: "top 85%",
                             toggleActions: "play none none none"
                         }
                     }
                 );
             });
             
-            // Weekly schedule cards hover effect
-            const weekCards = document.querySelectorAll('.week-card');
+            // Fluid shape animations
+            const shapes = document.querySelectorAll('.fluid-shape');
             
-            weekCards.forEach(card => {
-                card.addEventListener('mouseenter', () => {
+            shapes.forEach((shape, index) => {
+                // Random movement for each shape
+                gsap.to(shape, {
+                    y: () => Math.random() * 120 - 60,
+                    x: () => Math.random() * 120 - 60,
+                    rotation: () => Math.random() * 10 - 5,
+                    duration: 20,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: "sine.inOut",
+                    delay: index * 1.5
+                });
+                
+                // Parallax effect while scrolling
+                gsap.to(shape, {
+                    y: () => (index % 2 === 0) ? "+=80" : "-=80",
+                    scrollTrigger: {
+                        trigger: "body",
+                        start: "top top",
+                        end: "bottom bottom",
+                        scrub: 1.5
+                    }
+                });
+            });
+            
+            // Image parallax hover effect
+            const imageParallax = document.querySelectorAll('.image-parallax');
+            
+            imageParallax.forEach(image => {
+                image.addEventListener('mousemove', (e) => {
+                    const rect = image.getBoundingClientRect();
+                    const x = (e.clientX - rect.left) / rect.width - 0.5;
+                    const y = (e.clientY - rect.top) / rect.height - 0.5;
+                    
+                    gsap.to(image, {
+                        duration: 0.6,
+                        x: x * 20,
+                        y: y * 20,
+                        ease: "power2.out",
+                        overwrite: true
+                    });
+                });
+                
+                image.addEventListener('mouseleave', () => {
+                    gsap.to(image, {
+                        duration: 1.2,
+                        x: 0,
+                        y: 0,
+                        ease: "elastic.out(1, 0.3)"
+                    });
+                });
+            });
+            
+            // Testimonial card hover effects
+            const testimonialCards = document.querySelectorAll('.testimonial-card');
+            
+            testimonialCards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = (e.clientX - rect.left) / rect.width - 0.5;
+                    const y = (e.clientY - rect.top) / rect.height - 0.5;
+                    
                     gsap.to(card, {
-                        y: -10,
-                        duration: 0.3,
-                        ease: "power2.out"
+                        duration: 0.5,
+                        rotationY: x * 10,
+                        rotationX: -y * 10,
+                        ease: "power2.out",
+                        transformPerspective: 1000,
+                        transformOrigin: "center"
                     });
                 });
                 
                 card.addEventListener('mouseleave', () => {
                     gsap.to(card, {
-                        y: 0,
-                        duration: 0.3,
-                        ease: "power2.out"
+                        duration: 1,
+                        rotationY: 0,
+                        rotationX: 0,
+                        ease: "elastic.out(1, 0.3)"
                     });
+                });
+            });
+            
+            // Button hover effect
+            const buttons = document.querySelectorAll('.btn-primary');
+            
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', () => {
+                    gsap.to(button, {
+                        scale: 1.05,
+                        duration: 0.3,
+                        ease: "power1.out"
+                    });
+                });
+                
+                button.addEventListener('mouseleave', () => {
+                    gsap.to(button, {
+                        scale: 1,
+                        duration: 0.3,
+                        ease: "power1.out"
+                    });
+                });
+            });
+            
+            // Benefit cards hover effect
+            const benefitCards = document.querySelectorAll('.benefit-card');
+            
+            benefitCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    const cardElement = card.querySelector('.card');
+                    if (cardElement) {
+                        gsap.to(cardElement, {
+                            y: -10,
+                            scale: 1.02,
+                            duration: 0.4,
+                            ease: "power2.out"
+                        });
+                    }
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    const cardElement = card.querySelector('.card');
+                    if (cardElement) {
+                        gsap.to(cardElement, {
+                            y: 0,
+                            scale: 1,
+                            duration: 0.4,
+                            ease: "power2.out"
+                        });
+                    }
                 });
             });
 
@@ -2171,8 +2305,28 @@
                     });
                 }
             }, 1000);
+            
+            // Weekly schedule cards hover effect
+            const weekCards = document.querySelectorAll('.week-card');
+            
+            weekCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    gsap.to(card, {
+                        y: -10,
+                        duration: 0.4,
+                        ease: "power2.out"
+                    });
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    gsap.to(card, {
+                        y: 0,
+                        duration: 0.4,
+                        ease: "power2.out"
+                    });
+                });
+            });
         });
     </script>
 </body>
 </html>
-<!-- End of HTML Document -->
