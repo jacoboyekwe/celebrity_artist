@@ -15,6 +15,7 @@
                         gold: '#E1B87F',
                         cream: '#F0E6D8',
                         charcoal: '#333333',
+                        ctaGreen: '#00cc33', // Added CTA green color
                     },
                     fontFamily: {
                         serif: ['Cormorant Garamond', 'serif'],
@@ -38,6 +39,7 @@
             --burgundy: #B45252;
             --gold: #E1B87F;
             --cream: #F0E6D8;
+            --cta-green: #00cc33; /* Added CTA green as a CSS variable */
         }
 
         html {
@@ -145,7 +147,7 @@
 
         /* Standardized button styles for all CTAs */
         .btn-cta {
-            background: var(--burgundy);
+            background: #00cc33; /* Fixed green color for all CTAs */
             color: white;
             font-weight: 600;
             border-radius: 8px;
@@ -154,15 +156,30 @@
             overflow: hidden;
             border: none;
             cursor: pointer;
-            padding: 14px 28px;
-            box-shadow: 0 4px 10px rgba(180, 82, 82, 0.3);
+            padding: 16px 32px; /* Increased padding for bigger buttons */
+            box-shadow: 0 4px 10px rgba(0, 204, 51, 0.3);
             display: inline-block;
             text-align: center;
+            font-size: 1.1rem; /* Slightly larger text */
         }
 
         .btn-cta:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(180, 82, 82, 0.4);
+            box-shadow: 0 10px 20px rgba(0, 204, 51, 0.4);
+            animation: pulse-grow 1.5s infinite alternate;
+        }
+        
+        /* Pulse grow animation for CTA hover */
+        @keyframes pulse-grow {
+            0% {
+                transform: scale(1) translateY(-3px);
+            }
+            50% {
+                transform: scale(1.05) translateY(-3px);
+            }
+            100% {
+                transform: scale(1) translateY(-3px);
+            }
         }
 
         .btn-cta::after {
@@ -182,7 +199,7 @@
         }
 
         .dark .btn-cta:hover {
-            box-shadow: 0 10px 20px rgba(180, 82, 82, 0.5);
+            box-shadow: 0 10px 20px rgba(0, 204, 51, 0.5);
         }
         
         .scroll-reveal {
@@ -323,6 +340,11 @@
             border-radius: 0.75rem;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             aspect-ratio: 16/9;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark .video-container {
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .video-container iframe {
@@ -585,6 +607,19 @@
             margin: 15px 0;
             font-family: 'Montserrat', sans-serif;
         }
+
+        .countdown-units {
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--burgundy);
+            margin-bottom: 10px;
+        }
+
+        .countdown-unit {
+            width: 25%;
+        }
         
         .spots-remaining {
             font-size: 0.9rem;
@@ -595,7 +630,7 @@
         
         .main-cta {
             display: block;
-            background: var(--burgundy);
+            background: #00cc33; /* Changed to green */
             color: white;
             text-align: center;
             padding: 18px 30px;
@@ -608,13 +643,14 @@
             overflow: hidden;
             border: none;
             max-width: 500px;
-            box-shadow: 0 8px 20px rgba(180, 82, 82, 0.25);
+            box-shadow: 0 8px 20px rgba(0, 204, 51, 0.25);
             transition: all 0.3s ease;
         }
         
         .main-cta:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(180, 82, 82, 0.35);
+            box-shadow: 0 12px 25px rgba(0, 204, 51, 0.35);
+            animation: pulse-grow 1.5s infinite alternate;
         }
         
         .main-cta .price {
@@ -627,14 +663,14 @@
         .inspirational-footer {
             text-align: center;
             margin-top: 40px;
-            padding: 30px 0;
+            padding: 30px 20px;
             background-color: rgba(180, 82, 82, 0.05);
             border-radius: 10px;
         }
         
         .copyright-footer {
             text-align: center;
-            padding: 20px 0;
+            padding: 20px;
             font-size: 0.9rem;
             color: #666;
         }
@@ -763,23 +799,86 @@
                 background-color: #111;
             }
         }
+
+        /* Before/After list styles */
+        .before-list, .after-list {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 20px;
+        }
+
+        .before-list li, .after-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .before-list li::before {
+            content: '';
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            margin-right: 12px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23ef4444' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M6 18L18 6M6 6l12 12' /%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            margin-top: 1px;
+        }
+
+        .after-list li::before {
+            content: '';
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            margin-right: 12px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2322c55e' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M5 13l4 4L19 7' /%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            margin-top: 1px;
+        }
+        
+        /* Updated countdown container styles to match YouTube width */
+        .countdown-container {
+            background-color: #000000;
+            color: white;
+            width: 100%;
+            max-width: 900px; /* Match the video container width */
+            margin: 0 auto; /* Center it */
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+            
+        .action-button {
+            background-color: #00cc33; /* Green CTA color */
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1.25rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        
+        .action-button:hover {
+            background-color: #00b82e;
+            animation: pulse-grow 1.5s infinite alternate;
+        }
     </style>
 </head>
 
 <body class="bg-white text-gray-800 relative" id="top">
-    <!-- Navigation -->
-    <nav class="container mx-auto px-6 py-6 md:py-8 flex justify-between items-center relative z-10">
-        <div class="text-2xl font-serif font-light tracking-wider">
-           CELEBRITY <span class="text-burgundy font-normal">ARTIST</span>
-        </div>
-    </nav>
-
     <!-- Hero Section -->
     <header class="container mx-auto pt-16 md:pt-24 pb-12 md:pb-20 px-6 md:px-20 relative overflow-hidden">
         <div class="flex justify-center items-center">
             <div class="scroll-reveal text-center max-w-3xl">
                 <h1 class="text-split-animation">
-                    <span class="art-title text-sm text-burgundy block mb-2">Creative Expression</span>
                     <span class="fluid-title text-5xl md:text-7xl mb-6 block">
                         Release <span class="text-burgundy relative">
                             Stress
@@ -793,9 +892,10 @@
                 <p class="text-lg md:text-xl mb-10 mx-auto font-light opacity-90">
                     Without changing your schedule or leaving the comfort of your home.
                 </p>
+                
                 <div class="flex justify-center">
                     <button class="btn-cta animate-pulse text-white px-8 py-3 text-lg font-medium tracking-wider scroll-to-cta">
-                        Start Your Journey Now
+                        Begin your journey now!
                     </button>
                 </div>
             </div>
@@ -823,24 +923,50 @@
             </div>
         </div>
     </div>
-
-    <!-- First Countdown Section -->
-    <section id="first-countdown" class="container mx-auto px-6 section-gap">
-            
-            <button class="main-cta scroll-to-cta mt-8">
-                Start Your Journey Now!
-                <span class="price">Request your Exclusive Invitation for $72</span>
-            </button>
-            
-            <div class="countdown-box">
-                <div class="countdown-label">Journey Starts In:</div>
-                <div class="countdown-timer">
-                    <span id="days">00</span>:<span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
+ 
+    <!-- countdown section-->
+    <div>
+        <div class="countdown-container">
+            <div class="countdown-content">
+                <div class="title-section">
+                    <div class="journey-title">"Start your journey Now!</div>
+                    <div class="invitation-text">Request your Exclusive Invitation for <span class="price">$72</span>"</div>
                 </div>
-                <div class="spots-remaining">SECURE YOUR HEALING & CREATIVE EXPERIENCE</div>
+                
+                <div class="journey-starts">Journey Starts In:</div>
+                
+                <div class="countdown">
+                    <div class="countdown-unit">
+                        <span id="days" class="countdown-value">00</span>
+                        <span class="countdown-label">Days</span>
+                    </div>
+                    <span class="separator">:</span>
+                    <div class="countdown-unit">
+                        <span id="hours" class="countdown-value">00</span>
+                        <span class="countdown-label">Hours</span>
+                    </div>
+                    <span class="separator">:</span>
+                    <div class="countdown-unit">
+                        <span id="minutes" class="countdown-value">00</span>
+                        <span class="countdown-label">Minutes</span>
+                    </div>
+                    <span class="separator">:</span>
+                    <div class="countdown-unit">
+                        <span id="seconds" class="countdown-value">00</span>
+                        <span class="countdown-label">Seconds</span>
+                    </div>
+                </div>
+                
+                <div class="flex justify-center">
+
+                    <button class="btn-cta animate-pulse text-white px-8 py-3 text-lg font-medium tracking-wider scroll-to-cta">
+                        START YOUR JOURNEY NOW
+                    </button>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+
 
      <!-- Testimonials Section -->
      <section class="py-12 md:py-16 px-6 container mx-auto relative">
@@ -1170,16 +1296,16 @@
             <h2 class="fluid-title text-4xl md:text-5xl mb-6">
                 The Truth <span class="text-burgundy">Is...</span>
             </h2>
-            <p class="text-lg md:text-xl mb-6 max-w-3xl mx-auto">
+            <p class="text-base md:text-lg mb-6 max-w-3xl mx-auto">
                 Stress holds you back from thinking clearly, performing at your best, and fully enjoying life. But it doesn't have to be that way.
             </p>
-            <p class="text-lg md:text-xl mb-6 max-w-3xl mx-auto">
+            <p class="text-base md:text-lg mb-6 max-w-3xl mx-auto">
                 According to the <span class="font-medium">American Psychological Association</span>, creative expression through art is a powerful way to manage stress, release emotional tension, and restore balance.
             </p>
-            <p class="text-lg md:text-xl mb-6 max-w-3xl mx-auto">
+            <p class="text-base md:text-lg mb-6 max-w-3xl mx-auto">
                 Those who embrace this journey experience greater clarity, resilience, and a deeper connection to themselves.
             </p>
-            <p class="text-lg md:text-xl mb-6 max-w-3xl mx-auto">
+            <p class="text-base md:text-lg mb-6 max-w-3xl mx-auto">
                 Follow this program and in just six weeks, you'll feel emotionally balanced, mentally clear, and fully in control. As stress fades, your ability to think, solve problems, and perform at your best will thrive.
             </p>
         </div>
@@ -1209,24 +1335,18 @@
             <h2 class="fluid-title text-4xl md:text-5xl mb-6">
                 It's No <span class="text-burgundy">Secret...</span>
             </h2>
-            <p class="text-lg md:text-xl mb-6 max-w-3xl mx-auto">
+            <p class="text-base md:text-lg mb-6 max-w-3xl mx-auto">
                 Stress can strain relationships, make parenting harder, and even affect your job.
             </p>
-            <p class="text-lg md:text-xl mb-6 max-w-3xl mx-auto">
+            <p class="text-base md:text-lg mb-6 max-w-3xl mx-auto">
                 But when you learn to manage it (and in the way I'll be guiding you on this journey), you'll always show up as your best self:
             </p>
             <p class="text-2xl md:text-xl text-burgundy font-serif mb-4">
                 Calm, Clear, and in Control
             </p>
-            <p class="text-lg md:text-xl max-w-3xl mx-auto">
+            <p class="text-base md:text-lg max-w-3xl mx-auto">
                 in your work, your relationships, and your life.
             </p>
-            
-            <div class="flex justify-center mt-10">
-                <button class="btn-cta scroll-to-cta">
-                    Join Now
-                </button>
-            </div>
         </div>
     </section>
 
@@ -1235,7 +1355,7 @@
         <div class="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
             <div class="scroll-reveal relative">
                 <div class="relative overflow-hidden rounded-2xl shadow-2xl">
-                    <img src="./images/jacob1.jpg" alt="Jacob Oyekwe - The Celebrity Artist" class="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700 ease-in-out">
+                    <img src="./images/jacob1.jpg" alt="Jacob Oyekwe - The Celebrity Artist" class="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700 ease-in-out" style="max-height: 500px; object-position: top;">
                 </div>
             </div>
             <div class="scroll-reveal">
@@ -1248,21 +1368,21 @@
                     The Celebrity Artist
                 </h3>
                 
-                <p class="text-lg mb-4">Location: North Cyprus</p>
-                <p class="text-lg mb-4">Dear Friend,</p>
-                <p class="text-lg mb-4">
+                <p class="text-base mb-4">Location: North Cyprus</p>
+                <p class="text-base mb-4">Dear Friend,</p>
+                <p class="text-base mb-4">
                     No matter how overwhelmed you feel or how complicated life seems, true change starts from within.
                 </p>
-                <p class="text-lg mb-4">
+                <p class="text-base mb-4">
                     When you nurture your inner peace, everything around you begins to flourish.
                 </p>
-                <p class="text-lg mb-4">
+                <p class="text-base mb-4">
                     Transformation takes time, but the journey is worth it.
                 </p>
-                <p class="text-lg mb-4">
+                <p class="text-base mb-4">
                     Over the next 6 weeks, you'll experience a powerful shift, one that brings clarity, balance, and renewal to every part of your life.
                 </p>
-                <p class="text-lg mb-6">
+                <p class="text-base mb-6">
                     But is this 6-week experience the right fit for you?
                 </p>
             </div>
@@ -1283,7 +1403,7 @@
                     <h3 class="text-2xl md:text-3xl text-center mb-6 font-serif text-burgundy">
                         IF YOU WANT PEACE AND EMOTIONAL RELEASE
                     </h3>
-                    <p class="text-lg md:text-xl text-center">
+                    <p class="text-base md:text-lg text-center">
                         Your mind is always racing work, deadlines, responsibilities. You crave a space to just breathe.
                         Art gives you that. With every brushstroke, stress fades, and calm takes over. No pressure, no rush just peace.
                     </p>
@@ -1294,7 +1414,7 @@
                     <h3 class="text-2xl md:text-3xl text-center mb-6 font-serif text-burgundy">
                         IF YOU WANT RELIEF, EXPRESSION AND FULFILLMENT
                     </h3>
-                    <p class="text-lg md:text-xl text-center">
+                    <p class="text-base md:text-lg text-center">
                         The daily grind feels endless. You want more than just getting through you want to feel alive.
                         Art lets you break free, express yourself, and find joy in creating. It's not about making perfect art, it's about feeling free.
                     </p>
@@ -1305,13 +1425,13 @@
                     <h3 class="text-2xl md:text-3xl text-center mb-6 font-serif text-burgundy">
                         IF YOU WANT TO FEEL INSPIRED, UNSTOPPABLE AND RENEWED
                     </h3>
-                    <p class="text-lg md:text-xl text-center">
+                    <p class="text-base md:text-lg text-center">
                         Lately, life feels dull. You miss that spark that energy. Art brings it back. Colors, movement, creativity it's a fresh start.
                         You won't just feel refreshed; you'll feel unstoppable.
                     </p>
                 </div>
             </div>
-    
+            <!--disqualify banner-->
             <div class="mt-16 bg-burgundy text-white py-10 px-6 rounded-xl text-center">
                 <h3 class="text-2xl md:text-3xl mb-4 font-serif">
                     If none of that disqualifies you, keep reading.
@@ -1319,12 +1439,6 @@
                 <p class="text-xl md:text-2xl">
                     This could be the most life-changing experience you'll ever have.
                 </p>
-            </div>
-            
-            <div class="flex justify-center mt-12">
-                <button class="btn-cta scroll-to-cta">
-                    Request Your Invitation
-                </button>
             </div>
         </section>
 
@@ -1338,25 +1452,25 @@
                 <h3 class="text-xl md:text-2xl mb-8 font-serif">
                     also known as The Celebrity Artist.
                 </h3>
-                <p class="text-lg mb-4">
+                <p class="text-base mb-4">
                     I'm an artist with over a decade of experience practicing art.
                 </p>
-                <p class="text-lg mb-4">
+                <p class="text-base mb-4">
                     My work has been showcased in prestigious spaces worldwide, including the renowned Ivy League Restaurant, and my pencil drawings have been featured in the Cyprus Modern Art Museum. But beyond creating visually stunning pieces, I've dedicated my journey to exploring the deep connection between art and emotional well-being.
                 </p>
-                <p class="text-lg mb-4">
+                <p class="text-base mb-4">
                     For years, I've studied how artistic expression can be a powerful tool for relaxation, mindfulness, and stress relief. I've had the privilege of helping many individuals embark on this journey -- guiding them to use art as a way to heal, release stress, and find inner peace. Seeing their transformation has been one of the most fulfilling aspects of my work.
                 </p>
-                <p class="text-lg mb-4">
+                <p class="text-base mb-4">
                     Art isn't just about creating -- it's about healing. Every brushstroke, every pencil shade carries emotion, allowing us to process feelings and find calm amidst life's chaos.
                 </p>
-                <p class="text-lg mb-4">
+                <p class="text-base mb-4">
                     That's why I designed this 6-week Creative Healing Experience to guide you in using art as a tool to ease daily stress, improve focus, and reconnect with yourself in a peaceful, nurturing environment.
                 </p>
             </div>
             <div class="scroll-reveal relative order-1 md:order-2">
                 <div class="relative overflow-hidden rounded-2xl shadow-2xl">
-                    <img src="/images/jacob1.jpg" alt="Jacob Oyekwe Portrait" class="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700 ease-in-out">
+                    <img src="/images/jacob2.jpg" alt="Jacob Oyekwe Portrait" class="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700 ease-in-out" style="max-height: 500px; object-position: top;">
                 </div>
             </div>
         </div>
@@ -1373,104 +1487,25 @@
             <div class="before">
                 <img src="./images/frustrated.jpg" alt="Person feeling frustrated before the experience" class="section-image">
                 <h3>Before Your Art for the Soul Experience</h3>
-
-                <div class="flex items-start space-x-4">
-                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-red-500 flex items-center justify-center mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                    <p class="text-lg">Waking up exhausted, even after a full night's sleep, because your mind never truly shuts off.</p>
-                </div>
-
-                <div class="flex items-start space-x-4">
-                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-red-500 flex items-center justify-center mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                    <p class="text-lg">Carrying work stress home, making it hard to relax or enjoy time with family.</p>
-                </div>
-
-                
-                <div class="flex items-start space-x-4">
-                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-red-500 flex items-center justify-center mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                    <p class="text-lg">Feeling mentally drained by constant deadlines and pressure, leaving little energy for yourself.
-                    </p>
-                </div>
-
-                
-                <div class="flex items-start space-x-4">
-                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-red-500 flex items-center justify-center mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                    <p class="text-lg">Struggling with anxiety or tension headaches, yet pushing through because there's no time to slow .</p>
-                </div>
-
-                <div class="flex items-start space-x-4">
-                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-red-500 flex items-center justify-center mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                    <p class="text-lg"> Losing patience easily, whether in meetings, with coworkers, or at home.</p>
-                </div>
+                <ul class="before-list">
+                    <li>Waking up exhausted, even after a full night's sleep, because your mind never truly shuts off.</li>
+                    <li>Carrying work stress home, making it hard to relax or enjoy time with family.</li>
+                    <li>Feeling mentally drained by constant deadlines and pressure, leaving little energy for yourself.</li>
+                    <li>Struggling with anxiety or tension headaches, yet pushing through because there's no time to slow down.</li>
+                    <li>Losing patience easily, whether in meetings, with coworkers, or at home.</li>
+                </ul>
             </div>
-
+            
             <div class="after">
-                <img src="./images/happy.jpg" alt="Person feeling happy after the experience" class="section-image">
+                <img src="/images/happy.jpg" alt="Person feeling happy after the experience" class="section-image">
                 <h3>After Your Art for the Soul Experience</h3>
-
-                <div class="flex items-start space-x-4">
-                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                    <p class="text-lg">You no longer carry the weight of work stress home with you.</p>
-                </div>
-
-                <div class="flex items-start space-x-4">
-                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                    <p class="text-lg">Your mind feels clearer, lighter, and more in control.</p>
-                </div>
-                                
-                <div class="flex items-start space-x-4">
-                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                    <p class="text-lg">You have a clear roadmap of activities to turn to when stress feels overwhelming.</p>
-                </div>
-                           
-                <div class="flex items-start space-x-4">
-                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                    <p class="text-lg"> You sleep deeper and wake up feeling refreshed.</p>
-                </div>
-
-                <div class="flex items-start space-x-4">
-                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center mt-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                    <p class="text-lg"> You feel more present and engaged in your personal life.</p>
-                </div>
+                <ul class="after-list">
+                    <li>You no longer carry the weight of work stress home with you.</li>
+                    <li>Your mind feels clearer, lighter, and more in control.</li>
+                    <li>You have a clear roadmap of activities to turn to when stress feels overwhelming.</li>
+                    <li>You sleep deeper and wake up feeling refreshed.</li>
+                    <li>You feel more present and engaged in your personal life.</li>
+                </ul>
             </div>
         </div>
     </div>
@@ -1492,7 +1527,12 @@
                 <p>Not giving yourself this chance.</p>
             </div>
             <div class="cta-container">
-                <button id="journeyBtn" class="btn-cta scroll-to-cta">Start Your Journey Now!</button>
+                <button id="journeyBtn" class="btn-cta scroll-to-cta">Start Your Journey Now!
+            <span class="block text-sm mt-2">28th May-July 13th, 2025.</span>
+
+                </button>
+                
+
             </div>
         </div>
     </div>
@@ -1558,7 +1598,7 @@
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                                 </svg>
                             </div>
-                            <p class="text-lg">A Reserved Spot in this intimate, 20-person experience</p>
+                            <p class="text-base">A Reserved Spot in this intimate, 20-person experience</p>
                         </div>
                         <div class="flex items-start space-x-4">
                             <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center mt-1">
@@ -1566,7 +1606,7 @@
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                                 </svg>
                             </div>
-                            <p class="text-lg">Private Community Access for ongoing support & shared growth</p>
+                            <p class="text-base">Private Community Access for ongoing support & shared growth</p>
                         </div>
                         <div class="flex items-start space-x-4">
                             <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center mt-1">
@@ -1574,7 +1614,7 @@
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                                 </svg>
                             </div>
-                            <p class="text-lg">A 1-on-1 Personalized Therapy Session ($150 Value -- FREE)</p>
+                            <p class="text-base">A 1-on-1 Personalized Therapy Session ($150 Value -- FREE)</p>
                         </div>
                         <div class="flex items-start space-x-4">
                             <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center mt-1">
@@ -1582,7 +1622,7 @@
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                                 </svg>
                             </div>
-                            <p class="text-lg">A Guidebook on Effective Art Relaxation Techniques ($97 Value -- FREE)</p>
+                            <p class="text-base">A Guidebook on Effective Art Relaxation Techniques ($97 Value -- FREE)</p>
                         </div>
                     </div>
                 </div>
@@ -1591,8 +1631,8 @@
                     <h3 class="text-2xl md:text-3xl mb-8 font-serif text-burgundy">
                         How Flexible Is This Experience?
                     </h3>
-                    <p class="text-lg mb-8">
-                        This experience is designed to seamlessly fit into your schedule while guiding you through a structured, inspiring creative journey.
+                    <p class="text-base mb-8">
+                        This experience is designed for flexibility! You can attend live or watch the replays on your own time. Plus, you'll have ongoing community access for support.
                     </p>
                     
                     <div class="mb-8">
@@ -1632,14 +1672,14 @@
                 Why Do I Need to Request an <span class="text-burgundy">Invitation?</span>
             </h2>
             <div class="max-w-3xl mx-auto">
-                <p class="text-lg md:text-xl mb-6">
+                <p class="text-base md:text-lg mb-6">
                     As earlier mentioned, this isn't just a program, it's a deeply personal and transformative journey.
                 </p>
-                <p class="text-lg md:text-xl mb-6">
+                <p class="text-base md:text-lg mb-6">
                     To maintain an intimate and meaningful experience, participation is by invitation only.
                     This ensures that every member is truly committed to their growth, making the experience more powerful and rewarding for all involved.
                 </p>
-                <p class="text-lg md:text-xl mb-8">
+                <p class="text-base md:text-lg mb-8">
                     Most importantly, your invitation includes a 1:1 session to explore your needs and ensure this journey is the right fit for you.
                 </p>
             </div>
@@ -1656,7 +1696,7 @@
                             <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                         </svg>
                     </div>
-                    <p class="text-lg">Talk about what causes your stress and how this journey can help.</p>
+                    <p class="text-base">Talk about what causes your stress and how this journey can help.</p>
                 </div>
                 <div class="flex items-start space-x-4">
                     <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center mt-1">
@@ -1664,7 +1704,7 @@
                             <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                         </svg>
                     </div>
-                    <p class="text-lg">Guide you through the next steps in the program.</p>
+                    <p class="text-base">Guide you through the next steps in the program.</p>
                 </div>
                 <div class="flex items-start space-x-4">
                     <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-500 flex items-center justify-center mt-1">
@@ -1672,7 +1712,7 @@
                             <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                         </svg>
                     </div>
-                    <p class="text-lg">Make sure this is the right path for your growth and healing.</p>
+                    <p class="text-base">Make sure this is the right path for your growth and healing.</p>
                 </div>
             </div>
             </div>
@@ -1687,10 +1727,10 @@
             </h2>
         </div>
         <div class="card p-8 md:p-12 rounded-2xl max-w-4xl mx-auto scroll-reveal shadow-lg">
-            <p class="text-lg md:text-xl mb-6">
+            <p class="text-base md:text-lg mb-6">
                 Stress doesn't just disappear, it builds up, silently affecting your mind, body, and daily life. If you keep pushing through without an outlet, your sleep suffers, your energy drops, and your work and relationships start to feel like obligations instead of joys.
             </p>
-            <p class="text-lg md:text-xl mb-6">
+            <p class="text-base md:text-lg mb-6">
                 Right now, you may think, "I'll handle it later." But later turns into months, even years, of feeling overwhelmed. With structured yet flexible sessions twice a week, you'll have a space to release stress, regain clarity, and reconnect with the part of you that feels focused, creative, and in control.
             </p>
             
@@ -1706,6 +1746,7 @@
     </div>
 
     <div class="grid md:grid-cols-3 gap-8 md:gap-10">
+        <!-- Testimonial 4 -->
         <div class="card hover:border-burgundy/30 p-8 rounded-xl scroll-reveal">
             <!-- 5 Star Rating -->
             <div class="flex mb-4 text-yellow-400">
@@ -1731,7 +1772,7 @@
             </p>
             
             <div class="flex items-center">
-                <img src="/images/testimonial-4.png" alt="Emily R." class="w-12 h-12 rounded-full object-cover">
+                <img src="./images/testimonial-4.png" alt="Emily R." class="w-12 h-12 rounded-full object-cover">
                 <div class="ml-4">
                     <h4 class="font-medium">Nelotechie.</h4>
                 </div>
@@ -1740,6 +1781,7 @@
 
         <!-- Testimonial 5 -->
         <div class="card hover:border-burgundy/30 p-8 rounded-xl scroll-reveal">
+            <!-- 5 Star Rating -->
             <div class="flex mb-4 text-yellow-400">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.799-2.034c-.784-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -1763,7 +1805,7 @@
             </p>
             
             <div class="flex items-center">
-                <img src="/images/testimonial-5.jpg" alt="Chawa S." class="w-12 h-12 rounded-full object-cover">
+                <img src="./images/testimonial-5.jpg" alt="Chawa S." class="w-12 h-12 rounded-full object-cover">
                 <div class="ml-4">
                     <h4 class="font-medium">Chawa Setimala.</h4>
                 </div>
@@ -1772,6 +1814,7 @@
 
         <!-- Testimonial 6 -->
         <div class="card hover:border-burgundy/30 p-8 rounded-xl scroll-reveal">
+            <!-- 4.5 Star Rating -->
             <div class="flex mb-4 text-yellow-400">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.799-2.034c-.784-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -1795,7 +1838,7 @@
             </p>
             
             <div class="flex items-center">
-                <img src="/images/testimonial-6.jpg" alt="Sophia K." class="w-12 h-12 rounded-full object-cover">
+                <img src="./images/testimonial-6.jpg" alt="Sophia K." class="w-12 h-12 rounded-full object-cover">
                 <div class="ml-4">
                     <h4 class="font-medium">Chiamaka Chimaluma</h4>
                 </div>
@@ -1805,43 +1848,376 @@
     
 </section>
 
-<!-- Fast Action Bonus Section -->
-<section id="fast-action" class="container mx-auto px-6 section-gap">
-    <div class="fast-action-bonus">
-        <div class="fast-action-header">
-            <h2 class="fast-action-title">Imagine How Different You Would Feel In Just 6 Weeks</h2>
-            <p class="fast-action-desc">Join The Experience and Start Your Journey</p>
-        </div>
-    
-        <img src="./images/price&services.png">
-        <div class="grid md:grid-cols-2 gap-6 mt-8">
-            <div class="bonus-card">
-                <h3 class="bonus-title">Personalized Emotion Tracking Portrait</h3>
-                <p>A visual reflection of your emotional journey captured in two hand-drawn portraits: one at the start of your healing process and another after six weeks of creative growth.</p>
-            </div>
-            
-            <div class="bonus-card">
-                <h3 class="bonus-title">Flexible 1-on-1 Coaching Session During the 6-Week Experience </h3>
-                <span class="bonus-value">$300 Value - FREE</span>
-                <p>Fast action takers get the freedom to choose when to have their 1:1 private coaching session, making it easier to fit into their schedule.</p>
-            </div>
-        </div>
-        
-        <button class="main-cta scroll-to-cta mt-8">
-            Start Your Journey Now!
-            <span class="price">Request your Exclusive Invitation for $72</span>
-        </button>
-        
-        <div class="countdown-box">
-            <div class="countdown-label">Journey Starts In:</div>
-            <div class="countdown-timer">
-                <span id="days">00</span>:<span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
-            </div>
-            <div class="spots-remaining">SECURE YOUR HEALING & CREATIVE EXPERIENCE - ONLY 5 SPOTS LEFT</div>
-        </div>
-    </div>
-</section>
+<!-- Fast Action to pay section-->
 
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        @keyframes attention {
+            0% { box-shadow: 0 0 0 0 rgba(0, 204, 51, 0); }
+            10% { box-shadow: 0 0 10px 0 rgba(0, 204, 51, 0.5); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 204, 51, 0); }
+        }
+        
+        .attention-effect {
+            animation: attention 3s ease-in-out;
+        }
+        
+
+        
+        .bonus-container {
+            background: linear-gradient(to bottom, #111111, #000000);
+            border: 1px solid #333;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .bonus-title {
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .highlight {
+            color: #f7c44c;
+            font-weight: 700;
+        }
+        
+        .countdown-container {
+            background-color: #000000;
+            color: white;
+            width: 100%;
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .countdown-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        .title-section {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .journey-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .invitation-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.2;
+        }
+        
+        .price {
+            color: #ff3b30;
+        }
+        
+        .journey-starts {
+            font-size: 1.25rem;
+            text-align: center;
+            margin-bottom: 0.75rem;
+        }
+        
+        .countdown {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+            justify-content: center;
+        }
+        
+        .countdown-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .countdown-value {
+            font-size: 2.25rem;
+            line-height: 1;
+        }
+        
+        .countdown-label {
+            font-size: 0.75rem;
+            color: #ff3b30;
+            text-transform: uppercase;
+            margin-top: 0.25rem;
+        }
+        
+        .separator {
+            font-size: 2.25rem;
+            font-weight: bold;  
+            margin: 0 0.125rem;
+            line-height: 1;
+        }
+        
+        .action-button {
+            background-color: #00cc33;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1.25rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        
+        .action-button:hover {
+            background-color: #00b82e;
+            animation: pulse-grow 1.5s infinite alternate;
+        }
+        
+        .text-gold {
+            color: #f7c44c;
+        }
+        
+        .text-checkGreen {
+            color: #00cc33;
+        }
+        
+        /* Portrait mode - take up less space */
+        @media (orientation: portrait) {
+            .countdown-container {
+                padding: 1.5rem 1rem;
+            }
+            
+            .countdown-value {
+                font-size: 1.75rem;
+            }
+            
+            .separator {
+                font-size: 1.75rem;
+            }
+            
+            .invitation-text {
+                font-size: 1.25rem;
+            }
+            
+            .action-button {
+                padding: 0.75rem;
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* Small screens in any orientation */
+        @media (max-width: 480px) {
+            .countdown-value {
+                font-size: 1.5rem;
+            }
+            
+            .countdown-label {
+                font-size: 0.7rem;
+            }
+            
+            .separator {
+                font-size: 1.5rem;
+            }
+            
+            .invitation-text {
+                font-size: 1.1rem;
+            }
+            
+            .journey-title {
+                font-size: 1.25rem;
+            }
+            
+            .journey-starts {
+                font-size: 1rem;
+            }
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            .bg-gray-100.dark\:bg-gray-800 {
+                background-color: #1f2937;
+            }
+        }
+    </style>
+</head>
+<body class= >
+
+    <section id= "fast-action" class=" bg-[#e5d2a1] dark:bg-[#e5d2a1] flex flex-col items-center justify-center py-8 w-full">
+        <!-- "Imagine How Different" Section -->
+        <div class="w-full max-w-4xl px-4 py-8 text-center bg-black text-white">
+            <h2 class="text-xl md:text-2xl font-medium mb-2">Imagine How Different You Would Feel In Just 6 Weeks</h2>
+            <p class="text-gold text-lg md:text-xl font-medium mb-2">Join The Experience and Start Your Journey</p>
+            <p class="text-xl md:text-2xl font-bold">Request your invitation Now!</p>
+        </div>
+        
+        <!-- Image Section -->
+        <div class="w-full max-w-4xl px-4">
+            <img src="./images/price&services.png" alt="Program prices and services" class="w-full">
+        </div>
+        
+        <!-- Exclusive Fast-Action Bonus Section -->
+        <div class="w-full max-w-4xl px-8 py-10 text-center text-white bonus-container rounded-lg mb-8">
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-2 bonus-title tracking-wide">Exclusive Fast-Action Bonus</h2>
+            <p class="text-sm md:text-base mb-8 text-gray-400 font-medium tracking-wide">(Only for the First 7 Enrollments within the Next 24hrs)</p>
+            
+            <div class="mb-6 text-left max-w-3xl mx-auto space-y-6">
+                <div class="bg-black/30 p-5 rounded-lg border border-gray-800">
+                    <div class="flex items-start mb-2">
+                        <i class="fas fa-check-circle text-checkGreen text-xl md:text-2xl mt-1 mr-3"></i>
+                        <h3 class="font-bold text-lg md:text-xl text-white/95">Personalized Emotion Tracking Portrait</h3>
+                    </div>
+                    <p class="text-sm md:text-base text-gray-300 ml-9 leading-relaxed">
+                        A visual reflection of your emotional journey captured in two hand-drawn portraits: one at the start of your 
+                        healing process and another after <span class="highlight">six weeks of positive growth</span>.
+                    </p>
+                </div>
+                
+                <div class="bg-black/30 p-5 rounded-lg border border-gray-800">
+                    <div class="flex items-start mb-2">
+                        <i class="fas fa-check-circle text-checkGreen text-xl md:text-2xl mt-1 mr-3"></i>
+                        <h3 class="font-bold text-lg md:text-xl text-white/95">Flexible 1-on-1 Coaching Session</h3>
+                    </div>
+                    <p class="text-sm md:text-base text-gray-300 ml-9 leading-relaxed">
+                        Fast-action takers get the freedom to choose when to have their private 1:1 coaching session during the 
+                        6-Week Experience, making it even easier to fit into their schedule. 
+                        <span class="text-white font-semibold">($300 Value -- <span class="highlight">FREE!</span>)</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Animated Arrow Pointing to Countdown -->
+        <div class="w-full flex justify-center mb-2">
+            <div class="animate-bounce">
+                <svg class="w-12 h-12 text-red-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M10 3a1 1 0 00-1 1v10.586l-3.293-3.293a1 1 0 10-1.414 1.414l5 5a1 1 0 001.414 0l5-5a1 1 0 00-1.414-1.414L11 14.586V4a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                </svg>
+            </div>
+        </div>
+        
+        <!-- Countdown Timer Section - Half-width Design -->
+        <div class="w-full flex justify-center mb-8">
+            <div class="w-full max-w-md rounded-lg overflow-hidden shadow-lg">
+                <div class="bg-black text-white text-center py-6 px-4">
+                    <h2 class="text-xl font-bold mb-2">"Start your journey Now!</h2>
+                    <p class="text-xl font-bold mb-3">Request your Exclusive Invitation for <span class="text-red-600">$72</span>"</p>
+                    
+                    <div class="mb-3">
+                        <p class="text-lg mb-2">Journey Starts In:</p>
+                        <div class="flex justify-center items-end space-x-2">
+                            <div class="flex flex-col items-center">
+                                <span id="countdown-days" class="font-bold text-xl">29</span>
+                                <span class="text-xs">days</span>
+                            </div>
+                            <span class="font-bold text-xl pb-1">:</span>
+                            <div class="flex flex-col items-center">
+                                <span id="countdown-hours" class="font-bold text-xl">22</span>
+                                <span class="text-xs">hours</span>
+                            </div>
+                            <span class="font-bold text-xl pb-1">:</span>
+                            <div class="flex flex-col items-center">
+                                <span id="countdown-minutes" class="font-bold text-xl">49</span>
+                                <span class="text-xs">minutes</span>
+                            </div>
+                            <span class="font-bold text-xl pb-1">:</span>
+                            <div class="flex flex-col items-center">
+                                <span id="countdown-seconds" class="font-bold text-xl">19</span>
+                                <span class="text-xs">seconds</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="w-full flex justify-center py-3 bg-black">
+            
+                    <a href="https://paystack.com/pay/jointheexperience" class="btn-cta px-8 py-2 text-lg">
+                        <span class="relative z-10">Secure your healing & creative experience</span>
+                        <span class="block text-sm mt-2">ONLY 5 SPOTS !</span>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+       
+        // Apply attention effect to the button when page loads
+        window.addEventListener('DOMContentLoaded', () => {
+            // Wait a moment before applying the effect
+            setTimeout(() => {
+                actionButton.classList.add('attention-effect');
+            }, 1000);
+            
+            // Add click event to the button
+            actionButton.addEventListener('click', () => {
+                // Button click action here
+                console.log("Button clicked");
+            });
+        });
+        
+        // Check for dark/light mode preferences
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+        
+        // Update the countdown every second
+        function updateCountdown() {
+            // Set the countdown date (May 28, 2025)
+            const countDownDate = new Date("May 28, 2025 00:00:00").getTime();
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
+            
+            // Time calculations
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            // Update all countdown timers
+            document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
+            document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
+            document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
+            
+            // Update the second countdown timer
+            const countdownDays = document.getElementById("countdown-days");
+            const countdownHours = document.getElementById("countdown-hours");
+            const countdownMinutes = document.getElementById("countdown-minutes");
+            const countdownSeconds = document.getElementById("countdown-seconds");
+            
+            if (countdownDays) countdownDays.innerHTML = days.toString().padStart(2, '0');
+            if (countdownHours) countdownHours.innerHTML = hours.toString().padStart(2, '0');
+            if (countdownMinutes) countdownMinutes.innerHTML = minutes.toString().padStart(2, '0');
+            if (countdownSeconds) countdownSeconds.innerHTML = seconds.toString().padStart(2, '0');
+        }
+        
+        // Initial countdown update
+        updateCountdown();
+        
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
 
 <!-- Moments like this could be yours Section -->
     <div class="container mx-auto py-12 px-6">
@@ -1852,9 +2228,9 @@
         </div>
         <div>
             <div class="video-container">
-                <div class="video-placeholder cinematic-overlay" data-video-id="8LSt8_11wbQ">
+                <div class="video-placeholder cinematic-overlay" data-video-id="TNFGHLyPims">
                     <!-- Using a thumbnail from the YouTube video -->
-                    <div class="absolute inset-0 bg-cover bg-center" style="position: absolute; inset: 0; background-size: cover; background-position: center; background-image: url('https://i.ytimg.com/vi/8LSt8_11wbQ/maxresdefault.jpg');"></div>
+                    <div class="absolute inset-0 bg-cover bg-center" style="position: absolute; inset: 0; background-size: cover; background-position: center; background-image: url('https://i.ytimg.com/vi/TNFGHLyPims/maxresdefault.jpg');"></div>
                     <div style="position: absolute; inset: 0; background-color: rgba(0,0,0,0.4);"></div>
                     
                     <!-- Letterbox effect -->
@@ -1977,7 +2353,7 @@
     </div>
     
     <div class="copyright-footer">
-        <p>© 2025 Art for the Soul. All rights reserved.</p>
+        <p>© 2025 Art for the Soul by The Celebrity Artist. All rights reserved.</p>
     </div>
 
 
@@ -2000,7 +2376,11 @@
             
             scrollButtons.forEach(button => {
                 button.addEventListener('click', function(e) {
-                    e.preventDefault();
+                    // Only prevent default if it's a button, not an anchor with href
+                    if (this.tagName.toLowerCase() !== 'a' || !this.getAttribute('href')) {
+                        e.preventDefault();
+                    }
+                    
                     const targetSection = document.getElementById('fast-action');
                     
                     if (targetSection) {
@@ -2066,8 +2446,8 @@
                     gsap.to(span, {
                         opacity: 1,
                         y: 0,
-                        duration: 0.2,
-                        delay: 0.05 + (index * 0.1),
+                        duration: 0.4, // Reduced from 0.5
+                        delay: 0.05 + (index * 0.08), // Reduced from 0.1 + (index * 0.1)
                         ease: "power3.out"
                     });
                 });
@@ -2086,7 +2466,7 @@
                     {
                         opacity: 1,
                         y: 0,
-                        duration: 0.4,
+                        duration: 0.5, // Reduced from 0.7
                         scrollTrigger: {
                             trigger: element,
                             start: "top 90%",
@@ -2103,7 +2483,7 @@
                 card.addEventListener('mouseenter', () => {
                     gsap.to(card, {
                         y: -10,
-                        duration: 0.3,
+                        duration: 0.2, // Reduced from 0.3
                         ease: "power2.out"
                     });
                 });
@@ -2111,7 +2491,7 @@
                 card.addEventListener('mouseleave', () => {
                     gsap.to(card, {
                         y: 0,
-                        duration: 0.3,
+                        duration: 0.2, // Reduced from 0.3
                         ease: "power2.out"
                     });
                 });
@@ -2175,4 +2555,3 @@
     </script>
 </body>
 </html>
-<!-- End of HTML Document -->
