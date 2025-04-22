@@ -10,7 +10,7 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#5D5CDE',
+                        primary: '#FF0000',
                         burgundy: '#B45252',
                         gold: '#E1B87F',
                         cream: '#F0E6D8',
@@ -2118,24 +2118,18 @@
                     <div class="mb-3">
                         <p class="text-lg mb-2">Journey Starts In:</p>
                         <div class="flex justify-center items-end space-x-2">
-                            <div class="flex flex-col items-center">
-                                <span id="countdown-days" class="font-bold text-xl">29</span>
-                                <span class="text-xs">days</span>
+
+                            <div class="bg-primary bg-opacity-10 dark:bg-opacity-20 rounded-lg p-4">
+                                <div id="24-hours" class="text-4xl md:text-5xl font-bold text-primary">24</div>
+                                <div class="text-sm text-gray-600 dark:text-gray-300 mt-1">Hours</div>
                             </div>
-                            <span class="font-bold text-xl pb-1">:</span>
-                            <div class="flex flex-col items-center">
-                                <span id="countdown-hours" class="font-bold text-xl">22</span>
-                                <span class="text-xs">hours</span>
+                            <div class="bg-primary bg-opacity-10 dark:bg-opacity-20 rounded-lg p-4">
+                                <div id="24-minutes" class="text-4xl md:text-5xl font-bold text-primary">00</div>
+                                <div class="text-sm text-gray-600 dark:text-gray-300 mt-1">Minutes</div>
                             </div>
-                            <span class="font-bold text-xl pb-1">:</span>
-                            <div class="flex flex-col items-center">
-                                <span id="countdown-minutes" class="font-bold text-xl">49</span>
-                                <span class="text-xs">minutes</span>
-                            </div>
-                            <span class="font-bold text-xl pb-1">:</span>
-                            <div class="flex flex-col items-center">
-                                <span id="countdown-seconds" class="font-bold text-xl">19</span>
-                                <span class="text-xs">seconds</span>
+                            <div class="bg-primary bg-opacity-10 dark:bg-opacity-20 rounded-lg p-4">
+                                <div id="24-seconds" class="text-4xl md:text-5xl font-bold text-primary">00</div>
+                                <div class="text-sm text-gray-600 dark:text-gray-300 mt-1">Seconds</div>
                             </div>
                         </div>
                     </div>
@@ -2152,6 +2146,124 @@
             </div>
         </div>
     </section>
+    
+    <script>
+
+
+        //24 hour countdown timer with localStorage and expiration action
+                // DOM elements
+                const hoursEl = document.getElementById('24-hours');
+                const minutesEl = document.getElementById('24-minutes');
+                const secondsEl = document.getElementById('24-seconds');
+        
+                // Constants
+                const STORAGE_KEY = 'sales_countdown_end_time';
+                const EXPIRATION_ACTION_KEY = 'sales_countdown_expiration_action';
+                const COUNTDOWN_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+        
+                // Initialize countdown state
+                let countdownEndTime = localStorage.getItem(STORAGE_KEY);
+                let timerInterval;
+                let selectedAction = localStorage.getItem(EXPIRATION_ACTION_KEY) || 'restart';
+        
+                // Always set to restart mode
+                selectedAction = 'restart';
+        
+                // Initialize the countdown or start a new one
+                function initializeCountdown() {
+                    if (!countdownEndTime) {
+                        // First visit - start a new 24 hour countdown
+                        startNewCountdown();
+                    } else {
+                        // Check if the saved countdown has already ended
+                        const now = Date.now();
+                        if (now >= parseInt(countdownEndTime)) {
+                            handleExpiration();
+                        } else {
+                            // Continue the existing countdown
+                            startCountdown();
+                        }
+                    }
+                }
+        
+                // Start a new 24 hour countdown
+                function startNewCountdown() {
+                    const now = Date.now();
+                    countdownEndTime = now + COUNTDOWN_DURATION;
+                    localStorage.setItem(STORAGE_KEY, countdownEndTime);
+                    startCountdown();
+                    statusMessageEl.textContent = 'Sale in progress! Hurry before time runs out.';
+                    statusMessageEl.classList.remove('countdown-expired', 'text-red-600');
+                }
+        
+                // Start the countdown timer
+                function startCountdown() {
+                    clearInterval(timerInterval);
+                    updateCountdown();
+                    timerInterval = setInterval(updateCountdown, 100); // Update every 100ms for smoother countdown
+                }
+        
+                // Update the countdown display
+                function updateCountdown() {
+                    const now = Date.now();
+                    const timeRemaining = Math.max(0, parseInt(countdownEndTime) - now);
+                    
+                    if (timeRemaining <= 0) {
+                        clearInterval(timerInterval);
+                        updateTimerDisplay(0, 0, 0, 0);
+                        handleExpiration();
+                        return;
+                    }
+        
+                    // Calculate hours, minutes, seconds, and milliseconds
+                    const hours = Math.floor(timeRemaining / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+                    const milliseconds = timeRemaining % 1000;
+        
+                    updateTimerDisplay(hours, minutes, seconds, milliseconds);
+                }
+        
+                // Update the timer display elements
+                function updateTimerDisplay(hours, minutes, seconds, milliseconds) {
+                    hoursEl.textContent = hours.toString().padStart(2, '0');
+                    minutesEl.textContent = minutes.toString().padStart(2, '0');
+                    secondsEl.textContent = seconds.toString().padStart(2, '0');
+                    // Milliseconds element is removed from the display
+                }
+        
+                // Handle what happens when the timer expires
+                function handleExpiration() {
+                    // Apply visual indicator
+                    document.getElementById('countdown-container').classList.add('bg-red-50', 'dark:bg-red-900', 'dark:bg-opacity-20', 'rounded-lg', 'p-4');
+                    
+                    switch (selectedAction) {
+                        case 'restart':
+                            statusMessageEl.textContent = 'Previous sale ended. Starting a new 24-hour countdown!';
+                            startNewCountdown();
+                            break;
+                            
+                        case 'message':
+                            statusMessageEl.textContent = 'Sale has ended! Thank you for your interest.';
+                            statusMessageEl.classList.add('countdown-expired', 'text-red-600');
+                            updateTimerDisplay(0, 0, 0, 0);
+                            break;
+                            
+                        case 'custom':
+                            // This is where you can add your custom logic
+                            statusMessageEl.textContent = 'Sale has ended! Custom action triggered.';
+                            statusMessageEl.classList.add('countdown-expired', 'text-red-600');
+                            
+                            // Example of a custom action - you can replace this with your own code
+                            console.log('Custom expiration action triggered');
+                            // customExpirationAction();
+                            break;
+                    }
+                }
+        
+                // Initialize on page load
+                initializeCountdown();
+            </script>
 
     <script>
        

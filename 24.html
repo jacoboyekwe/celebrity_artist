@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>24-Hour Sales Countdown</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <script>
         tailwind.config = {
             theme: {
@@ -17,6 +18,7 @@
             darkMode: 'class'
         }
     </script>
+
     <style>
         @keyframes pulse {
             0%, 100% {
@@ -30,100 +32,40 @@
             animation: pulse 2s infinite;
         }
     </style>
+
+
+
 </head>
 <body class="bg-white dark:bg-gray-900 min-h-screen transition-colors duration-300">
     <div class="container mx-auto px-4 py-10 max-w-3xl">
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-6">
-            <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-4 text-center">
-                24-Hour Flash Sale!
-            </h1>
-
-            <!-- Countdown Timer Display -->
-            <div id="countdown-container" class="mb-8">
-                <div class="grid grid-cols-3 gap-4 text-center my-6">
-                    <div class="bg-primary bg-opacity-10 dark:bg-opacity-20 rounded-lg p-4">
-                        <div id="hours" class="text-4xl md:text-5xl font-bold text-primary">24</div>
-                        <div class="text-sm text-gray-600 dark:text-gray-300 mt-1">Hours</div>
-                    </div>
-                    <div class="bg-primary bg-opacity-10 dark:bg-opacity-20 rounded-lg p-4">
-                        <div id="minutes" class="text-4xl md:text-5xl font-bold text-primary">00</div>
-                        <div class="text-sm text-gray-600 dark:text-gray-300 mt-1">Minutes</div>
-                    </div>
-                    <div class="bg-primary bg-opacity-10 dark:bg-opacity-20 rounded-lg p-4">
-                        <div id="seconds" class="text-4xl md:text-5xl font-bold text-primary">00</div>
-                        <div class="text-sm text-gray-600 dark:text-gray-300 mt-1">Seconds</div>
-                    </div>
+        <div id="fast-action-24" class="flex justify-center items-center min-h-[160px]">
+            <div class="grid grid-cols-3 gap-4 text-center">
+                <div class="bg-primary bg-opacity-10 dark:bg-opacity-20 rounded-lg p-4">
+                    <div id="24-hours" class="text-4xl md:text-5xl font-bold text-primary">24</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-300 mt-1">Hours</div>
                 </div>
-                
-                <div id="status-message" class="text-center text-lg font-medium text-gray-700 dark:text-gray-300 my-4">
-                    Sale in progress! Hurry before time runs out.
+                <div class="bg-primary bg-opacity-10 dark:bg-opacity-20 rounded-lg p-4">
+                    <div id="24-minutes" class="text-4xl md:text-5xl font-bold text-primary">00</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-300 mt-1">Minutes</div>
+                </div>
+                <div class="bg-primary bg-opacity-10 dark:bg-opacity-20 rounded-lg p-4">
+                    <div id="24-seconds" class="text-4xl md:text-5xl font-bold text-primary">00</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-300 mt-1">Seconds</div>
                 </div>
             </div>
+            
 
-            <!-- Expiration Settings -->
-            <div class="mb-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                <h2 class="font-semibold text-gray-900 dark:text-white mb-3">When timer expires:</h2>
-                <div class="space-y-2">
-                    <label class="flex items-center">
-                        <input type="radio" name="expirationAction" value="restart" class="mr-2 accent-primary" checked>
-                        <span class="text-gray-700 dark:text-gray-200">Restart timer automatically</span>
-                    </label>
-                    <label class="flex items-center">
-                        <input type="radio" name="expirationAction" value="message" class="mr-2 accent-primary">
-                        <span class="text-gray-700 dark:text-gray-200">Show expiration message</span>
-                    </label>
-                    <label class="flex items-center">
-                        <input type="radio" name="expirationAction" value="custom" class="mr-2 accent-primary">
-                        <span class="text-gray-700 dark:text-gray-200">Custom function (see code)</span>
-                    </label>
-                </div>
-            </div>
-
-            <!-- Action Buttons -->
-            <div class="flex flex-wrap gap-3 justify-center">
-                <button id="reset-button" class="bg-primary hover:bg-opacity-90 text-white font-medium py-2 px-6 rounded-lg transition">
-                    Reset Timer (For Testing)
-                </button>
-                <button id="demo-button" class="bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white font-medium py-2 px-6 rounded-lg transition">
-                    Set to Almost Expired
-                </button>
-            </div>
-        </div>
-
-        <!-- Instructions -->
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-            <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-3">How to Integrate</h2>
-            <div class="text-gray-700 dark:text-gray-300 space-y-3">
-                <p>This countdown persists between visits using localStorage. The countdown will resume from where it left off when a user returns to your page.</p>
-                <p>Choose your preferred behavior when the timer expires using the radio buttons above.</p>
-                <p>The "Reset Timer" button is for testing purposes - you can remove it in production.</p>
-            </div>
         </div>
     </div>
 
     <script>
-        // Check and apply dark mode based on user preference
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            document.documentElement.classList.add('dark');
-        }
-        
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-            if (event.matches) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
-        });
 
+
+//24 hour countdown timer with localStorage and expiration action
         // DOM elements
-        const hoursEl = document.getElementById('hours');
-        const minutesEl = document.getElementById('minutes');
-        const secondsEl = document.getElementById('seconds');
-        // milliseconds element has been removed from display
-        const statusMessageEl = document.getElementById('status-message');
-        const resetButton = document.getElementById('reset-button');
-        const demoButton = document.getElementById('demo-button');
-        const expirationOptions = document.getElementsByName('expirationAction');
+        const hoursEl = document.getElementById('24-hours');
+        const minutesEl = document.getElementById('24-minutes');
+        const secondsEl = document.getElementById('24-seconds');
 
         // Constants
         const STORAGE_KEY = 'sales_countdown_end_time';
@@ -135,20 +77,8 @@
         let timerInterval;
         let selectedAction = localStorage.getItem(EXPIRATION_ACTION_KEY) || 'restart';
 
-        // Set the selected expiration action from localStorage
-        for (const option of expirationOptions) {
-            if (option.value === selectedAction) {
-                option.checked = true;
-            }
-            
-            // Add event listener to save preference change
-            option.addEventListener('change', function() {
-                if (this.checked) {
-                    selectedAction = this.value;
-                    localStorage.setItem(EXPIRATION_ACTION_KEY, selectedAction);
-                }
-            });
-        }
+        // Always set to restart mode
+        selectedAction = 'restart';
 
         // Initialize the countdown or start a new one
         function initializeCountdown() {
@@ -241,36 +171,6 @@
                     break;
             }
         }
-
-        // Custom expiration action - replace with your own logic
-        function customExpirationAction() {
-            // Here you can add any custom action you want to happen when the timer expires
-            // For example:
-            // - Show a special modal
-            // - Redirect to another page
-            // - Display different content
-            // - Make an API call
-            console.log('Custom expiration handler - implement your logic here');
-        }
-
-        // Reset the countdown (for testing purposes)
-        resetButton.addEventListener('click', function() {
-            localStorage.removeItem(STORAGE_KEY);
-            document.getElementById('countdown-container').classList.remove('bg-red-50', 'dark:bg-red-900', 'dark:bg-opacity-20');
-            statusMessageEl.classList.remove('countdown-expired', 'text-red-600');
-            initializeCountdown();
-        });
-
-        // Set the timer to almost expired (for testing purposes)
-        demoButton.addEventListener('click', function() {
-            const now = Date.now();
-            countdownEndTime = now + 5000; // 5 seconds from now
-            localStorage.setItem(STORAGE_KEY, countdownEndTime);
-            startCountdown();
-            statusMessageEl.textContent = 'Sale ending in 5 seconds!';
-            statusMessageEl.classList.remove('countdown-expired', 'text-red-600');
-            document.getElementById('countdown-container').classList.remove('bg-red-50', 'dark:bg-red-900', 'dark:bg-opacity-20');
-        });
 
         // Initialize on page load
         initializeCountdown();
