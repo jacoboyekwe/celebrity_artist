@@ -40,7 +40,7 @@
 
             <!-- Countdown Timer Display -->
             <div id="countdown-container" class="mb-8">
-                <div class="grid grid-cols-4 gap-2 text-center my-6">
+                <div class="grid grid-cols-3 gap-4 text-center my-6">
                     <div class="bg-primary bg-opacity-10 dark:bg-opacity-20 rounded-lg p-4">
                         <div id="hours" class="text-4xl md:text-5xl font-bold text-primary">24</div>
                         <div class="text-sm text-gray-600 dark:text-gray-300 mt-1">Hours</div>
@@ -52,10 +52,6 @@
                     <div class="bg-primary bg-opacity-10 dark:bg-opacity-20 rounded-lg p-4">
                         <div id="seconds" class="text-4xl md:text-5xl font-bold text-primary">00</div>
                         <div class="text-sm text-gray-600 dark:text-gray-300 mt-1">Seconds</div>
-                    </div>
-                    <div class="bg-primary bg-opacity-10 dark:bg-opacity-20 rounded-lg p-4">
-                        <div id="milliseconds" class="text-4xl md:text-5xl font-bold text-primary">000</div>
-                        <div class="text-sm text-gray-600 dark:text-gray-300 mt-1">Ms</div>
                     </div>
                 </div>
                 
@@ -123,7 +119,7 @@
         const hoursEl = document.getElementById('hours');
         const minutesEl = document.getElementById('minutes');
         const secondsEl = document.getElementById('seconds');
-        const millisecondsEl = document.getElementById('milliseconds');
+        // milliseconds element has been removed from display
         const statusMessageEl = document.getElementById('status-message');
         const resetButton = document.getElementById('reset-button');
         const demoButton = document.getElementById('demo-button');
@@ -214,7 +210,7 @@
             hoursEl.textContent = hours.toString().padStart(2, '0');
             minutesEl.textContent = minutes.toString().padStart(2, '0');
             secondsEl.textContent = seconds.toString().padStart(2, '0');
-            millisecondsEl.textContent = milliseconds.toString().padStart(3, '0');
+            // Milliseconds element is removed from the display
         }
 
         // Handle what happens when the timer expires
@@ -281,4 +277,3 @@
     </script>
 </body>
 </html>
-
