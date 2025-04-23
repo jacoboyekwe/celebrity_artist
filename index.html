@@ -2105,7 +2105,7 @@
         </div>
         
         <!-- Countdown Timer Section - Half-width Design -->
-        <div class="w-full flex justify-center mb-8">
+        <div class="w-full flex justify-center mb-5">
             <div class="w-full max-w-md rounded-lg overflow-hidden shadow-lg">
                 <div class="bg-black text-white text-center py-6 px-4">
                     <h2 class="text-xl font-bold mb-2">"Get your exclusive fast action bonus Now!</h2>
@@ -2113,7 +2113,7 @@
                     
                     <div class="mb-3">
                         <p class="text-lg mb-2">Exclusive bonus ends in:</p>
-                        <div class="flex justify-center items-end space-x-2">
+                        <div class="flex justify-center items-end space-x-2" id="countdown-container">
 
                             <div class="bg-primary bg-opacity-10 dark:bg-opacity-20 rounded-lg p-4">
                                 <div id="24-hours" class="text-4xl md:text-5xl font-bold text-primary">24</div>
@@ -2143,123 +2143,106 @@
         </div>
     </section>
     
-    <script>
-
-
+        <script>
         //24 hour countdown timer with localStorage and expiration action
-                // DOM elements
-                const hoursEl = document.getElementById('24-hours');
-                const minutesEl = document.getElementById('24-minutes');
-                const secondsEl = document.getElementById('24-seconds');
         
-                // Constants
-                const STORAGE_KEY = 'sales_countdown_end_time';
-                const EXPIRATION_ACTION_KEY = 'sales_countdown_expiration_action';
-                const COUNTDOWN_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
-        
-                // Initialize countdown state
-                let countdownEndTime = localStorage.getItem(STORAGE_KEY);
-                let timerInterval;
-                let selectedAction = localStorage.getItem(EXPIRATION_ACTION_KEY) || 'restart';
-        
-                // Always set to restart mode
-                selectedAction = 'restart';
-        
-                // Initialize the countdown or start a new one
-                function initializeCountdown() {
-                    if (!countdownEndTime) {
-                        // First visit - start a new 24 hour countdown
-                        startNewCountdown();
-                    } else {
-                        // Check if the saved countdown has already ended
-                        const now = Date.now();
-                        if (now >= parseInt(countdownEndTime)) {
-                            handleExpiration();
-                        } else {
-                            // Continue the existing countdown
-                            startCountdown();
-                        }
-                    }
-                }
-        
-                // Start a new 24 hour countdown
-                function startNewCountdown() {
-                    const now = Date.now();
-                    countdownEndTime = now + COUNTDOWN_DURATION;
-                    localStorage.setItem(STORAGE_KEY, countdownEndTime);
-                    startCountdown();
-                    statusMessageEl.textContent = 'Sale in progress! Hurry before time runs out.';
-                    statusMessageEl.classList.remove('countdown-expired', 'text-red-600');
-                }
-        
-                // Start the countdown timer
-                function startCountdown() {
-                    clearInterval(timerInterval);
-                    updateCountdown();
-                    timerInterval = setInterval(updateCountdown, 100); // Update every 100ms for smoother countdown
-                }
-        
-                // Update the countdown display
-                function updateCountdown() {
-                    const now = Date.now();
-                    const timeRemaining = Math.max(0, parseInt(countdownEndTime) - now);
-                    
-                    if (timeRemaining <= 0) {
-                        clearInterval(timerInterval);
-                        updateTimerDisplay(0, 0, 0, 0);
-                        handleExpiration();
-                        return;
-                    }
-        
-                    // Calculate hours, minutes, seconds, and milliseconds
-                    const hours = Math.floor(timeRemaining / (1000 * 60 * 60));
-                    const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-                    const milliseconds = timeRemaining % 1000;
-        
-                    updateTimerDisplay(hours, minutes, seconds, milliseconds);
-                }
-        
-                // Update the timer display elements
-                function updateTimerDisplay(hours, minutes, seconds, milliseconds) {
-                    hoursEl.textContent = hours.toString().padStart(2, '0');
-                    minutesEl.textContent = minutes.toString().padStart(2, '0');
-                    secondsEl.textContent = seconds.toString().padStart(2, '0');
-                    // Milliseconds element is removed from the display
-                }
-        
-                // Handle what happens when the timer expires
-                function handleExpiration() {
-                    // Apply visual indicator
-                    document.getElementById('countdown-container').classList.add('bg-red-50', 'dark:bg-red-900', 'dark:bg-opacity-20', 'rounded-lg', 'p-4');
-                    
-                    switch (selectedAction) {
-                        case 'restart':
-                            statusMessageEl.textContent = 'Previous sale ended. Starting a new 24-hour countdown!';
-                            startNewCountdown();
-                            break;
-                            
-                        case 'message':
-                            statusMessageEl.textContent = 'Sale has ended! Thank you for your interest.';
-                            statusMessageEl.classList.add('countdown-expired', 'text-red-600');
-                            updateTimerDisplay(0, 0, 0, 0);
-                            break;
-                            
-                        case 'custom':
-                            // This is where you can add your custom logic
-                            statusMessageEl.textContent = 'Sale has ended! Custom action triggered.';
-                            statusMessageEl.classList.add('countdown-expired', 'text-red-600');
-                            
-                            // Example of a custom action - you can replace this with your own code
-                            console.log('Custom expiration action triggered');
-                            // customExpirationAction();
-                            break;
-                    }
-                }
-        
-                // Initialize on page load
-                initializeCountdown();
-            </script>
+        // DOM elements
+const hoursEl = document.getElementById('24-hours');
+const minutesEl = document.getElementById('24-minutes');
+const secondsEl = document.getElementById('24-seconds');
+const statusMessageEl = document.getElementById('status-message');
+const countdownContainer = document.getElementById('countdown-container');
+
+// Constants
+const STORAGE_KEY = 'sales_countdown_end_time';
+const COUNTDOWN_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+
+// Initialize countdown
+let countdownEndTime = localStorage.getItem(STORAGE_KEY);
+let timerInterval;
+
+function initializeCountdown() {
+    const now = Date.now();
+    
+    if (!countdownEndTime || now >= parseInt(countdownEndTime)) {
+        // Start new countdown if none exists or if expired
+        startNewCountdown();
+    } else {
+        // Continue existing countdown
+        startCountdown();
+    }
+}
+
+function startNewCountdown() {
+    const now = Date.now();
+    countdownEndTime = now + COUNTDOWN_DURATION;
+    localStorage.setItem(STORAGE_KEY, countdownEndTime);
+    
+    // Reset status message
+    if (statusMessageEl) {
+        statusMessageEl.textContent = 'Sale in progress! Hurry before time runs out.';
+        statusMessageEl.className = 'mt-2 text-sm';
+    }
+    
+    // Reset container styling
+    if (countdownContainer) {
+        countdownContainer.classList.remove('bg-red-50', 'dark:bg-red-900');
+    }
+    
+    startCountdown();
+}
+
+function startCountdown() {
+    clearInterval(timerInterval);
+    updateCountdown();
+    // Update every second instead of 100ms
+    timerInterval = setInterval(updateCountdown, 1000);
+}
+
+function updateCountdown() {
+    const now = Date.now();
+    const timeRemaining = Math.max(0, parseInt(countdownEndTime) - now);
+    
+    if (timeRemaining <= 0) {
+        clearInterval(timerInterval);
+        updateTimerDisplay(0, 0, 0);
+        handleExpiration();
+        return;
+    }
+    
+    const hours = Math.floor(timeRemaining / (1000 * 60 * 60));
+    const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+    
+    updateTimerDisplay(hours, minutes, seconds);
+}
+
+function updateTimerDisplay(hours, minutes, seconds) {
+    hoursEl.textContent = hours.toString().padStart(2, '0');
+    minutesEl.textContent = minutes.toString().padStart(2, '0');
+    secondsEl.textContent = seconds.toString().padStart(2, '0');
+}
+
+function handleExpiration() {
+    // Visual indication of expiration
+    if (countdownContainer) {
+        countdownContainer.classList.add('bg-red-50', 'dark:bg-red-900');
+    }
+    
+    // Status message
+    if (statusMessageEl) {
+        statusMessageEl.textContent = 'Previous sale ended. Starting a new 24-hour countdown!';
+        statusMessageEl.classList.add('text-red-600');
+    }
+    
+    // Start new countdown after 5 seconds (optional delay)
+    setTimeout(startNewCountdown, 5000);
+}
+
+// Initialize on page load
+initializeCountdown();
+
+        </script>
 
     <script>
        
