@@ -31,9 +31,7 @@
         })();
       </script>
 
-
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <script>
         tailwind.config = {
             theme: {
@@ -55,8 +53,9 @@
         }
     </script>
     <script src="https://unpkg.com/gsap@3.12.2/dist/gsap.min.js"></script>
+
     <script src="https://unpkg.com/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
-    
+
     <script>
         // Execute immediately, before the page renders
         (function() {
@@ -95,6 +94,8 @@
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap');
+        
+
 
         :root {
             --primary-color: #B45252;
@@ -948,41 +949,43 @@
         }
     </style>
 
-<script>
-    // This runs as soon as DOM is parsed
-    document.addEventListener('DOMContentLoaded', function() {
-      if (window.location.hash === '#join-us' || sessionStorage.getItem('scrollToFastAction') === 'true') {
-        var fastActionSection = document.getElementById('24hour');
-        if (fastActionSection) {
-          // Scroll immediately without animation
-          window.scrollTo(0, fastActionSection.getBoundingClientRect().top + window.pageYOffset);
-          
-          // Alternative approach as backup
-          fastActionSection.scrollIntoView();
-          
-          // Remove hiding style after a slight delay
-          setTimeout(function() {
-            var hideStyle = document.getElementById('temp-hide-style');
-            if (hideStyle) {
-              hideStyle.innerHTML = `
-                /* Fade in the rest of the content */
-                body > *:not(#24hour) {
-                  opacity: 1;
-                  transition: opacity 0.3s ease;
+
+    <script>
+        // This runs as soon as DOM is parsed
+        document.addEventListener('DOMContentLoaded', function() {
+          if (window.location.hash === '#join-us' || sessionStorage.getItem('scrollToFastAction') === 'true') {
+            var fastActionSection = document.getElementById('24hour');
+            if (fastActionSection) {
+              // Scroll immediately without animation
+              window.scrollTo(0, fastActionSection.getBoundingClientRect().top + window.pageYOffset);
+              
+              // Alternative approach as backup
+              fastActionSection.scrollIntoView();
+              
+              // Remove hiding style after a slight delay
+              setTimeout(function() {
+                var hideStyle = document.getElementById('temp-hide-style');
+                if (hideStyle) {
+                  hideStyle.innerHTML = `
+                    /* Fade in the rest of the content */
+                    body > *:not(#24hour) {
+                      opacity: 1;
+                      transition: opacity 0.3s ease;
+                    }
+                  `;
                 }
-              `;
+                // Clear the session storage flag
+                sessionStorage.removeItem('scrollToFastAction');
+              }, 200);
             }
-            // Clear the session storage flag
-            sessionStorage.removeItem('scrollToFastAction');
-          }, 200);
-        }
-      }
-    });
-  </script>
+          }
+        });
+      </script>
+
+
 </head>
 
 <body class="bg-white text-gray-800 relative" id="top">
-
 
     <script>
         // Execute as early as possible in the body
@@ -2180,8 +2183,8 @@
             }
         }
 
-                        /* Helper for immediate positioning when using direct links */
-                        html.direct-scroll {
+                /* Helper for immediate positioning when using direct links */
+                html.direct-scroll {
         scroll-behavior: auto !important;
         }
 
@@ -2194,7 +2197,7 @@
 </head>
 <body class= >
 
-    <section id= "fast-action" class=" bg-[#e5d2a1] dark:bg-[#e5d2a1] flex flex-col items-center justify-center py-8 w-full">
+    <section id= "fast-action" class=" bg-[#e5d2a1] dark:bg-[#e5d2a1] flex flex-col items-center justify-center py-8 w-full" style="scroll-margin-top: 0px;">
         <!-- "Imagine How Different" Section -->
         <div class="w-full max-w-4xl px-4 py-8 text-center bg-black text-white">
             <h2 class="text-xl md:text-2xl font-medium mb-2">Imagine How Different You Would Feel In Just 6 Weeks</h2>
@@ -2239,7 +2242,7 @@
         </div>
         
         <!-- Animated Arrow Pointing to Countdown -->
-        <div id = "24hour" class="w-full flex justify-center mb-2">
+        <div id= "24hour" class="w-full flex justify-center mb-2">
             <div class="animate-bounce">
                 <svg class="w-12 h-12 text-red-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M10 3a1 1 0 00-1 1v10.586l-3.293-3.293a1 1 0 10-1.414 1.414l5 5a1 1 0 001.414 0l5-5a1 1 0 00-1.414-1.414L11 14.586V4a1 1 0 00-1-1z" clip-rule="evenodd"></path>
@@ -2451,6 +2454,8 @@ initializeCountdown();
         
         // Update countdown every second
         setInterval(updateCountdown, 1000);
+
+
     </script>
 </body>
 
@@ -2787,6 +2792,8 @@ initializeCountdown();
                 }
             }, 1000);
         });
+    
     </script>
+
 </body>
 </html>
