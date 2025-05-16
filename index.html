@@ -1095,15 +1095,6 @@
         scroll-margin-top: 20px;
         }
 
-        /* Add these styles for hash navigation */
-    html.direct-scroll {
-    scroll-behavior: auto !important;
-}
-
-        /* This helps ensure sections are properly positioned in the viewport */
-        #join-us, #fast-action, #twentyFour {
-        scroll-margin-top: 20px;
-}
     </style>
 
 </head>
@@ -2282,6 +2273,73 @@ initializeCountdown();
 
         </script>
 
+    <script>
+       
+        // Apply attention effect to the button when page loads
+        window.addEventListener('DOMContentLoaded', () => {
+            // Wait a moment before applying the effect
+            setTimeout(() => {
+                actionButton.classList.add('attention-effect');
+            }, 1000);
+            
+            // Add click event to the button
+            actionButton.addEventListener('click', () => {
+                // Button click action here
+                console.log("Button clicked");
+            });
+        });
+        
+        // Check for dark/light mode preferences
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+        
+        // Update the countdown every second
+        function updateCountdown() {
+            // Set the countdown date (May 28, 2025)
+            const countDownDate = new Date("May 28, 2025 00:00:00").getTime();
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
+            
+            // Time calculations
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            // Update all countdown timers
+            document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
+            document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
+            document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
+            
+            // Update the second countdown timer
+            const countdownDays = document.getElementById("countdown-days");
+            const countdownHours = document.getElementById("countdown-hours");
+            const countdownMinutes = document.getElementById("countdown-minutes");
+            const countdownSeconds = document.getElementById("countdown-seconds");
+            
+            if (countdownDays) countdownDays.innerHTML = days.toString().padStart(2, '0');
+            if (countdownHours) countdownHours.innerHTML = hours.toString().padStart(2, '0');
+            if (countdownMinutes) countdownMinutes.innerHTML = minutes.toString().padStart(2, '0');
+            if (countdownSeconds) countdownSeconds.innerHTML = seconds.toString().padStart(2, '0');
+        }
+        
+        // Initial countdown update
+        updateCountdown();
+        
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+
+
+    </script>
 </body>
 
 <!-- Moments like this could be yours Section -->
@@ -2618,7 +2676,7 @@ initializeCountdown();
             }, 1000);
         });
     
-        // Function to handle hash-based navigation
+// Function to handle hash-based navigation
 function handleHashNavigation() {
     // Get the hash from the URL (remove the # symbol)
     const hash = window.location.hash.substring(1);
@@ -2653,8 +2711,10 @@ window.addEventListener('load', handleHashNavigation);
 
 // Also handle hash changes while on the page
 window.addEventListener('hashchange', handleHashNavigation);
-    </script>
 
+
+
+    </script>
 
 </body>
 </html>
