@@ -1095,6 +1095,15 @@
         scroll-margin-top: 20px;
         }
 
+        /* Add these styles for hash navigation */
+    html.direct-scroll {
+    scroll-behavior: auto !important;
+}
+
+        /* This helps ensure sections are properly positioned in the viewport */
+        #join-us, #fast-action, #twentyFour {
+        scroll-margin-top: 20px;
+}
     </style>
 
 </head>
@@ -2609,7 +2618,43 @@ initializeCountdown();
             }, 1000);
         });
     
+        // Function to handle hash-based navigation
+function handleHashNavigation() {
+    // Get the hash from the URL (remove the # symbol)
+    const hash = window.location.hash.substring(1);
+    
+    if (hash) {
+        // Add direct-scroll class to temporarily disable smooth scrolling
+        document.documentElement.classList.add('direct-scroll');
+        
+        // Find the element with the matching ID
+        const targetElement = document.getElementById(hash);
+        
+        if (targetElement) {
+            // Small delay to ensure DOM is fully ready
+            setTimeout(() => {
+                // Scroll to the target element
+                targetElement.scrollIntoView();
+                
+                // Optional: Adjust scroll position if needed (e.g., for fixed headers)
+                window.scrollBy(0, -20);
+                
+                // Remove the direct-scroll class to re-enable smooth scrolling
+                setTimeout(() => {
+                    document.documentElement.classList.remove('direct-scroll');
+                }, 100);
+            }, 100);
+        }
+    }
+}
+
+// Run hash navigation on page load
+window.addEventListener('load', handleHashNavigation);
+
+// Also handle hash changes while on the page
+window.addEventListener('hashchange', handleHashNavigation);
     </script>
+
 
 </body>
 </html>
