@@ -2680,7 +2680,7 @@ function handleHashNavigation() {
     const pathname = window.location.pathname === '/jointheexperience/' ? '/jointheexperience/' : window.location.pathname;
     const isSamePage = pathname ;
 
-    if (isSamePage) {
+   // if (isSamePage) {
         // Add direct-scroll class to temporarily disable smooth scrolling
         document.documentElement.classList.add('direct-scroll');
         
@@ -2702,7 +2702,7 @@ function handleHashNavigation() {
                 }, 100);
             }, 100);
         }
-    }
+    //}
 }
 
 // Run hash navigation on page load
