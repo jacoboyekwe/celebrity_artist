@@ -35,6 +35,7 @@
         (function() {
           // Check if URL contains the join-us hash
           if (window.location.hash === '#join-us') {
+
             // Store this instruction to run as early as possible
             window.addEventListener('load', function() {
               // Get the twentyFour section
@@ -927,7 +928,7 @@
     <script>
         // This runs as soon as DOM is parsed
         document.addEventListener('DOMContentLoaded', function() {
-          if (window.location.hash === '#join-us' || sessionStorage.getItem('scrollToFastAction') === 'true') {
+          if (window.location.hash === '#join-us' || sessionStorage.getItem('scrollTotwentyFour') === 'true') {
             var fastActionSection = document.getElementById('twentyFour');
             if (fastActionSection) {
               // Scroll immediately without animation
@@ -949,7 +950,7 @@
                   `;
                 }
                 // Clear the session storage flag
-                sessionStorage.removeItem('scrollToFastAction');
+                sessionStorage.removeItem('scrollTotwentyFour');
               }, 200);
             }
           }
@@ -964,7 +965,7 @@
     <script>
         // Execute as early as possible in the body
         (function() {
-          if (window.location.hash === '#join-us' || sessionStorage.getItem('scrollToFastAction') === 'true') {
+          if (window.location.hash === '#join-us' || sessionStorage.getItem('scrollTotwentyFour') === 'true') {
             var fastActionElement = document.getElementById('twentyFour');
             if (fastActionElement) {
               // Force immediate scroll
@@ -2216,7 +2217,7 @@
         </div>
         
         <!-- Animated Arrow Pointing to Countdown -->
-        <div id= "twentyFour" class="w-full flex justify-center mb-2">
+        <div id= "join-us" class="w-full flex justify-center mb-2">
             <div class="animate-bounce">
                 <svg class="w-12 h-12 text-red-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M10 3a1 1 0 00-1 1v10.586l-3.293-3.293a1 1 0 10-1.414 1.414l5 5a1 1 0 001.414 0l5-5a1 1 0 00-1.414-1.414L11 14.586V4a1 1 0 00-1-1z" clip-rule="evenodd"></path>
@@ -2595,7 +2596,7 @@ initializeCountdown();
                         e.preventDefault();
                     }
                     
-                    const targetSection = document.getElementById('twentyFour');
+                    const targetSection = document.getElementById('join-us');
                     
                     if (targetSection) {
                         targetSection.scrollIntoView({
