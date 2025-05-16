@@ -2678,7 +2678,7 @@ function handleHashNavigation() {
     const hash = window.location.hash.substring(1);
     const host = window.location.host === 'jacoboyekwe.github.io' ? 'jacoboyekwe.github.io' : window.location.host;
     const pathname = window.location.pathname === '/jointheexperience/' ? '/jointheexperience/' : window.location.pathname;
-    const isSamePage = host + pathname ;
+    const isSamePage = pathname ;
 
     if (isSamePage) {
         // Add direct-scroll class to temporarily disable smooth scrolling
