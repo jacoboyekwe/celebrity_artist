@@ -5,84 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Creative Healing Journey</title>
 
-<script>
-  // Execute immediately, before the page renders
-  (function() {
-    // Function to attempt scrolling to the section
-    function scrollToSection() {
-      console.log("Attempting to scroll to 24hour section");
-      // Get the 24hour section
-      var fastActionSection = document.getElementById('24hour');
-      
-      if (fastActionSection) {
-        console.log("24hour section found, scrolling");
-        // Account for fixed headers in WordPress themes
-        var headerOffset = 100; // Adjust this value based on your theme's header height
-        var elementPosition = fastActionSection.getBoundingClientRect().top;
-        var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-        
-        // Prevent any scroll jitter by disabling smooth scrolling temporarily
-        document.documentElement.style.scrollBehavior = 'auto';
-        
-        // Try multiple scroll methods for better compatibility
-        fastActionSection.scrollIntoView({block: "start", inline: "nearest"});
-        window.scrollTo(0, offsetPosition);
-        
-        // Re-enable smooth scrolling after a short delay
-        setTimeout(function() {
-          document.documentElement.style.scrollBehavior = 'smooth';
-        }, 100);
-        
-        return true;
-      } else {
-        console.log("24hour section not found");
-        return false;
-      }
-    }
-    
-    // Function to poll for the section if not immediately available
-    function pollForSection() {
-      if (scrollToSection()) return; // Exit if successful on first try
-      
-      // Set up polling to find the section (WordPress often loads content dynamically)
-      var attempts = 0;
-      var maxAttempts = 20; // Try for 10 seconds
-      var checkInterval = setInterval(function() {
-        attempts++;
-        if (scrollToSection() || attempts >= maxAttempts) {
-          clearInterval(checkInterval);
-        }
-      }, 500); // Check every 500ms
-    }
-    
-    // Check if URL contains the join-us hash
-    if (window.location.hash === '#join-us') {
-      console.log("Join-us hash detected in URL");
-      
-      // Try scrolling as early as possible
-      if (document.readyState === 'complete' || document.readyState === 'interactive') {
-        pollForSection(); // Document already loaded
-      } else {
-        // Wait for DOM content to load
-        document.addEventListener('DOMContentLoaded', pollForSection);
-      }
-      
-      // Also try on full page load
-      window.addEventListener('load', function() {
-        // Additional delay after load to ensure dynamic content is rendered
-        setTimeout(pollForSection, 1000);
-      });
-      
-      // Also handle hash changes while on the page
-      window.addEventListener('hashchange', function() {
-        if (window.location.hash === '#join-us') {
-          pollForSection();
-        }
-      });
-    }
-  })();
-</script>
-
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -115,8 +37,8 @@
           if (window.location.hash === '#join-us') {
             // Store this instruction to run as early as possible
             window.addEventListener('load', function() {
-              // Get the 24hour section
-              var fastActionSection = document.getElementById('24hour');
+              // Get the twentyFour section
+              var fastActionSection = document.getElementById('twentyFour');
               if (fastActionSection) {
                 // Instantly scroll without animation
                 fastActionSection.scrollIntoView(false);
@@ -134,7 +56,7 @@
             
             // Also add a scroll instruction that runs even earlier (on DOMContentLoaded)
             document.addEventListener('DOMContentLoaded', function() {
-              var fastActionSection = document.getElementById('24hour');
+              var fastActionSection = document.getElementById('twentyFour');
               if (fastActionSection) {
                 // Force scroll without animation
                 window.scrollTo(0, fastActionSection.offsetTop);
@@ -1006,7 +928,7 @@
         // This runs as soon as DOM is parsed
         document.addEventListener('DOMContentLoaded', function() {
           if (window.location.hash === '#join-us' || sessionStorage.getItem('scrollToFastAction') === 'true') {
-            var fastActionSection = document.getElementById('24hour');
+            var fastActionSection = document.getElementById('twentyFour');
             if (fastActionSection) {
               // Scroll immediately without animation
               window.scrollTo(0, fastActionSection.getBoundingClientRect().top + window.pageYOffset);
@@ -1020,7 +942,7 @@
                 if (hideStyle) {
                   hideStyle.innerHTML = `
                     /* Fade in the rest of the content */
-                    body > *:not(#24hour) {
+                    body > *:not(#twentyFour) {
                       opacity: 1;
                       transition: opacity 0.3s ease;
                     }
@@ -1043,7 +965,7 @@
         // Execute as early as possible in the body
         (function() {
           if (window.location.hash === '#join-us' || sessionStorage.getItem('scrollToFastAction') === 'true') {
-            var fastActionElement = document.getElementById('24hour');
+            var fastActionElement = document.getElementById('twentyFour');
             if (fastActionElement) {
               // Force immediate scroll
               window.scrollTo({
@@ -1052,7 +974,7 @@
               });
               
               // Mark the body with a class for potential CSS targeting
-              document.body.classList.add('direct-to-24hour');
+              document.body.classList.add('direct-to-twentyFour');
             }
           }
         })();
@@ -2241,7 +2163,7 @@
         }
 
         /* This helps ensure the section is properly positioned in the viewport */
-        #24hour {
+        #twentyFour {
         scroll-margin-top: 20px;
         }
 
@@ -2294,7 +2216,7 @@
         </div>
         
         <!-- Animated Arrow Pointing to Countdown -->
-        <div id= "24hour" class="w-full flex justify-center mb-2">
+        <div id= "twentyFour" class="w-full flex justify-center mb-2">
             <div class="animate-bounce">
                 <svg class="w-12 h-12 text-red-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M10 3a1 1 0 00-1 1v10.586l-3.293-3.293a1 1 0 10-1.414 1.414l5 5a1 1 0 001.414 0l5-5a1 1 0 00-1.414-1.414L11 14.586V4a1 1 0 00-1-1z" clip-rule="evenodd"></path>
@@ -2673,7 +2595,7 @@ initializeCountdown();
                         e.preventDefault();
                     }
                     
-                    const targetSection = document.getElementById('24hour');
+                    const targetSection = document.getElementById('twentyFour');
                     
                     if (targetSection) {
                         targetSection.scrollIntoView({
