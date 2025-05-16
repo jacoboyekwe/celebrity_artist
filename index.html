@@ -29,48 +29,12 @@
     <script src="https://unpkg.com/gsap@3.12.2/dist/gsap.min.js"></script>
 
     <script src="https://unpkg.com/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
-
-    <script>
-        // Execute immediately, before the page renders
-        (function() {
-          // Check if URL contains the join-us hash
-          if (window.location.hash === '#join-us') {
-
-            // Store this instruction to run as early as possible
-            window.addEventListener('load', function() {
-              // Get the twentyFour section
-              var fastActionSection = document.getElementById('twentyFour');
-              if (fastActionSection) {
-                // Instantly scroll without animation
-                fastActionSection.scrollIntoView(false);
-                
-                // Prevent any scroll jitter by disabling smooth scrolling temporarily
-                document.documentElement.style.scrollBehavior = 'auto';
-                window.scrollTo(0, fastActionSection.offsetTop);
-                
-                // Re-enable smooth scrolling after a short delay
-                setTimeout(function() {
-                  document.documentElement.style.scrollBehavior = 'smooth';
-                }, 100);
-              }
-            });
-            
-            // Also add a scroll instruction that runs even earlier (on DOMContentLoaded)
-            document.addEventListener('DOMContentLoaded', function() {
-              var fastActionSection = document.getElementById('twentyFour');
-              if (fastActionSection) {
-                // Force scroll without animation
-                window.scrollTo(0, fastActionSection.offsetTop);
-              }
-            });
-          }
-        })();
-      </script>
     
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap');
         
-
 
         :root {
             --primary-color: #B45252;
@@ -922,65 +886,222 @@
             background-color: #00b82e;
             animation: pulse-grow 1.5s infinite alternate;
         }
-    </style>
 
 
-    <script>
-        // This runs as soon as DOM is parsed
-        document.addEventListener('DOMContentLoaded', function() {
-          if (window.location.hash === '#join-us' || sessionStorage.getItem('scrollTotwentyFour') === 'true') {
-            var fastActionSection = document.getElementById('twentyFour');
-            if (fastActionSection) {
-              // Scroll immediately without animation
-              window.scrollTo(0, fastActionSection.getBoundingClientRect().top + window.pageYOffset);
-              
-              // Alternative approach as backup
-              fastActionSection.scrollIntoView();
-              
-              // Remove hiding style after a slight delay
-              setTimeout(function() {
-                var hideStyle = document.getElementById('temp-hide-style');
-                if (hideStyle) {
-                  hideStyle.innerHTML = `
-                    /* Fade in the rest of the content */
-                    body > *:not(#twentyFour) {
-                      opacity: 1;
-                      transition: opacity 0.3s ease;
-                    }
-                  `;
-                }
-                // Clear the session storage flag
-                sessionStorage.removeItem('scrollTotwentyFour');
-              }, 200);
+                @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        @keyframes attention {
+            0% { box-shadow: 0 0 0 0 rgba(0, 204, 51, 0); }
+            10% { box-shadow: 0 0 10px 0 rgba(0, 204, 51, 0.5); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 204, 51, 0); }
+        }
+        
+        .attention-effect {
+            animation: attention 3s ease-in-out;
+        }
+        
+
+        
+        .bonus-container {
+            background: linear-gradient(to bottom, #111111, #000000);
+            border: 1px solid #333;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .bonus-title {
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .highlight {
+            color: #f7c44c;
+            font-weight: 700;
+        }
+        
+        .countdown-container {
+            background-color: #000000;
+            color: white;
+            width: 100%;
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .countdown-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        .title-section {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .journey-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .invitation-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.2;
+        }
+        
+        .price {
+            color: #ff3b30;
+        }
+        
+        .journey-starts {
+            font-size: 1.25rem;
+            text-align: center;
+            margin-bottom: 0.75rem;
+        }
+        
+        .countdown {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+            justify-content: center;
+        }
+        
+        .countdown-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .countdown-value {
+            font-size: 2.25rem;
+            line-height: 1;
+        }
+        
+        .countdown-label {
+            font-size: 0.75rem;
+            color: #ff3b30;
+            text-transform: uppercase;
+            margin-top: 0.25rem;
+        }
+        
+        .separator {
+            font-size: 2.25rem;
+            font-weight: bold;  
+            margin: 0 0.125rem;
+            line-height: 1;
+        }
+        
+        .action-button {
+            background-color: #00cc33;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1.25rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        
+        .action-button:hover {
+            background-color: #00b82e;
+            animation: pulse-grow 1.5s infinite alternate;
+        }
+        
+        .text-gold {
+            color: #f7c44c;
+        }
+        
+        .text-checkGreen {
+            color: #00cc33;
+        }
+        
+        /* Portrait mode - take up less space */
+        @media (orientation: portrait) {
+            .countdown-container {
+                padding: 1.5rem 1rem;
             }
-          }
-        });
-      </script>
+            
+            .countdown-value {
+                font-size: 1.75rem;
+            }
+            
+            .separator {
+                font-size: 1.75rem;
+            }
+            
+            .invitation-text {
+                font-size: 1.25rem;
+            }
+            
+            .action-button {
+                padding: 0.75rem;
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* Small screens in any orientation */
+        @media (max-width: 480px) {
+            .countdown-value {
+                font-size: 1.5rem;
+            }
+            
+            .countdown-label {
+                font-size: 0.7rem;
+            }
+            
+            .separator {
+                font-size: 1.5rem;
+            }
+            
+            .invitation-text {
+                font-size: 1.1rem;
+            }
+            
+            .journey-title {
+                font-size: 1.25rem;
+            }
+            
+            .journey-starts {
+                font-size: 1rem;
+            }
+        }
 
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            .bg-gray-100.dark\:bg-gray-800 {
+                background-color: #1f2937;
+            }
+        }
+
+                /* Helper for immediate positioning when using direct links */
+                html.direct-scroll {
+        scroll-behavior: auto !important;
+        }
+
+        /* This helps ensure the section is properly positioned in the viewport */
+        #twentyFour {
+        scroll-margin-top: 20px;
+        }
+
+    </style>
 
 </head>
 
+
+
 <body class="bg-white text-gray-800 relative" id="top">
-
-    <script>
-        // Execute as early as possible in the body
-        (function() {
-          if (window.location.hash === '#join-us' || sessionStorage.getItem('scrollTotwentyFour') === 'true') {
-            var fastActionElement = document.getElementById('twentyFour');
-            if (fastActionElement) {
-              // Force immediate scroll
-              window.scrollTo({
-                top: fastActionElement.offsetTop,
-                behavior: 'auto'
-              });
-              
-              // Mark the body with a class for potential CSS targeting
-              document.body.classList.add('direct-to-twentyFour');
-            }
-          }
-        })();
-      </script>
-
 
     <!-- Hero Section -->
     <header class="container mx-auto pt-16 md:pt-24 pb-0 md:pb-10 px-6 md:px-0 relative overflow-hidden">
@@ -1957,219 +2078,6 @@
 
 <!-- Fast Action to pay section-->
 
-<head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-        
-        @keyframes attention {
-            0% { box-shadow: 0 0 0 0 rgba(0, 204, 51, 0); }
-            10% { box-shadow: 0 0 10px 0 rgba(0, 204, 51, 0.5); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 204, 51, 0); }
-        }
-        
-        .attention-effect {
-            animation: attention 3s ease-in-out;
-        }
-        
-
-        
-        .bonus-container {
-            background: linear-gradient(to bottom, #111111, #000000);
-            border: 1px solid #333;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        .bonus-title {
-            letter-spacing: 0.5px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        .highlight {
-            color: #f7c44c;
-            font-weight: 700;
-        }
-        
-        .countdown-container {
-            background-color: #000000;
-            color: white;
-            width: 100%;
-            padding: 2rem 1rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .countdown-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            max-width: 600px;
-        }
-        
-        .title-section {
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-        
-        .journey-title {
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 0.5rem;
-        }
-        
-        .invitation-text {
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-align: center;
-            line-height: 1.2;
-        }
-        
-        .price {
-            color: #ff3b30;
-        }
-        
-        .journey-starts {
-            font-size: 1.25rem;
-            text-align: center;
-            margin-bottom: 0.75rem;
-        }
-        
-        .countdown {
-            display: flex;
-            gap: 0.75rem;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            font-weight: bold;
-            justify-content: center;
-        }
-        
-        .countdown-unit {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .countdown-value {
-            font-size: 2.25rem;
-            line-height: 1;
-        }
-        
-        .countdown-label {
-            font-size: 0.75rem;
-            color: #ff3b30;
-            text-transform: uppercase;
-            margin-top: 0.25rem;
-        }
-        
-        .separator {
-            font-size: 2.25rem;
-            font-weight: bold;  
-            margin: 0 0.125rem;
-            line-height: 1;
-        }
-        
-        .action-button {
-            background-color: #00cc33;
-            color: white;
-            border: none;
-            width: 100%;
-            padding: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 1.25rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-        }
-        
-        .action-button:hover {
-            background-color: #00b82e;
-            animation: pulse-grow 1.5s infinite alternate;
-        }
-        
-        .text-gold {
-            color: #f7c44c;
-        }
-        
-        .text-checkGreen {
-            color: #00cc33;
-        }
-        
-        /* Portrait mode - take up less space */
-        @media (orientation: portrait) {
-            .countdown-container {
-                padding: 1.5rem 1rem;
-            }
-            
-            .countdown-value {
-                font-size: 1.75rem;
-            }
-            
-            .separator {
-                font-size: 1.75rem;
-            }
-            
-            .invitation-text {
-                font-size: 1.25rem;
-            }
-            
-            .action-button {
-                padding: 0.75rem;
-                font-size: 1.1rem;
-            }
-        }
-        
-        /* Small screens in any orientation */
-        @media (max-width: 480px) {
-            .countdown-value {
-                font-size: 1.5rem;
-            }
-            
-            .countdown-label {
-                font-size: 0.7rem;
-            }
-            
-            .separator {
-                font-size: 1.5rem;
-            }
-            
-            .invitation-text {
-                font-size: 1.1rem;
-            }
-            
-            .journey-title {
-                font-size: 1.25rem;
-            }
-            
-            .journey-starts {
-                font-size: 1rem;
-            }
-        }
-
-        /* Dark mode support */
-        @media (prefers-color-scheme: dark) {
-            .bg-gray-100.dark\:bg-gray-800 {
-                background-color: #1f2937;
-            }
-        }
-
-                /* Helper for immediate positioning when using direct links */
-                html.direct-scroll {
-        scroll-behavior: auto !important;
-        }
-
-        /* This helps ensure the section is properly positioned in the viewport */
-        #twentyFour {
-        scroll-margin-top: 20px;
-        }
-
-    </style>
-</head>
 <body class= >
 
     <section id= "fast-action" class=" bg-[#e5d2a1] dark:bg-[#e5d2a1] flex flex-col items-center justify-center py-8 w-full" style="scroll-margin-top: 0px;">
@@ -2365,73 +2273,6 @@ initializeCountdown();
 
         </script>
 
-    <script>
-       
-        // Apply attention effect to the button when page loads
-        window.addEventListener('DOMContentLoaded', () => {
-            // Wait a moment before applying the effect
-            setTimeout(() => {
-                actionButton.classList.add('attention-effect');
-            }, 1000);
-            
-            // Add click event to the button
-            actionButton.addEventListener('click', () => {
-                // Button click action here
-                console.log("Button clicked");
-            });
-        });
-        
-        // Check for dark/light mode preferences
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            document.documentElement.classList.add('dark');
-        }
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-            if (event.matches) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
-        });
-        
-        // Update the countdown every second
-        function updateCountdown() {
-            // Set the countdown date (May 28, 2025)
-            const countDownDate = new Date("May 28, 2025 00:00:00").getTime();
-            const now = new Date().getTime();
-            const distance = countDownDate - now;
-            
-            // Time calculations
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
-            // Update all countdown timers
-            document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
-            document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
-            document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
-            document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
-            
-            // Update the second countdown timer
-            const countdownDays = document.getElementById("countdown-days");
-            const countdownHours = document.getElementById("countdown-hours");
-            const countdownMinutes = document.getElementById("countdown-minutes");
-            const countdownSeconds = document.getElementById("countdown-seconds");
-            
-            if (countdownDays) countdownDays.innerHTML = days.toString().padStart(2, '0');
-            if (countdownHours) countdownHours.innerHTML = hours.toString().padStart(2, '0');
-            if (countdownMinutes) countdownMinutes.innerHTML = minutes.toString().padStart(2, '0');
-            if (countdownSeconds) countdownSeconds.innerHTML = seconds.toString().padStart(2, '0');
-        }
-        
-        // Initial countdown update
-        updateCountdown();
-        
-        // Update countdown every second
-        setInterval(updateCountdown, 1000);
-
-
-    </script>
 </body>
 
 <!-- Moments like this could be yours Section -->
