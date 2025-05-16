@@ -2481,6 +2481,42 @@ initializeCountdown();
 
 
     <script>
+
+                // Function to handle hash-based navigation
+        function handleHashNavigation() {
+            // Get the hash from the URL (remove the # symbol)
+            const hash = window.location.hash.substring(1);
+            
+            if (hash) {
+                // Add direct-scroll class to temporarily disable smooth scrolling
+                document.documentElement.classList.add('direct-scroll');
+                
+                // Find the element with the matching ID
+                const targetElement = document.getElementById(hash);
+                
+                if (targetElement) {
+                    // Scroll to the target element with a slight delay to ensure DOM is fully ready
+                    setTimeout(() => {
+                        // Scroll to the target element
+                        targetElement.scrollIntoView();
+                        
+                        // Adjust scroll position if needed (for fixed headers)
+                        window.scrollBy(0, -20);
+                        
+                        // Add highlight effect if it's the join-us section
+                        if (hash === 'join-us') {
+                            highlightCountdownSection();
+                        }
+                        
+                        // Remove the direct-scroll class to re-enable smooth scrolling
+                        setTimeout(() => {
+                            document.documentElement.classList.remove('direct-scroll');
+                        }, 100);
+                    }, 300); // Increased delay for iframe environment
+                }
+            }
+        }
+
         // Dark mode detection
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
             document.documentElement.classList.add('dark');
