@@ -5,31 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Creative Healing Journey</title>
 
-    <script>
-        // Immediate execution script - must be at the top of the head
-        (function() {
-          // Check if URL contains the join-us hash
-          if (window.location.hash === '#join-us') {
-            // 1. Store the intention in sessionStorage
-            sessionStorage.setItem('scrollToFastAction', 'true');
-            
-            // 2. Create and inject a style element that hides the upper content
-            var style = document.createElement('style');
-            style.id = 'temp-hide-style';
-            style.innerHTML = `
-              /* Temporarily hide everything except 24hour section */
-              body > *:not(#24hour) {
-                opacity: 0;
-              }
-              /* Ensure immediate positioning */
-              html, body {
-                scroll-behavior: auto !important;
-              }
-            `;
-            document.head.appendChild(style);
-          }
-        })();
-      </script>
+<script>
+  // Execute immediately, before the page renders
+  (function() {
+    // Function to attempt scrolling to the section
+    function scrollToSection() {
+      console.log("Attempting to scroll to 24hour section");
+      // Get the 24hour section
+      var fastActionSection = document.getElementById('24hour');
+      
+      if (fastActionSection) {
+        console.log("24hour section found, scrolling");
+        // Account for fixed headers in WordPress themes
+        var headerOffset = 100; // Adjust this value based on your theme's header height
+        var elementPosition = fastActionSection.getBoundingClientRect().top;
+        var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        
+        // Prevent any scroll jitter by disabling smooth scrolling temporarily
+        document.documentElement.style.scrollBehavior = 'auto';
+        
+        // Try multiple scroll methods for better compatibility
+        fastActionSection.scrollIntoView({block: "start", inline: "nearest"});
+        window.scrollTo(0, offsetPosition);
+        
+        // Re-enable smooth scrolling after a short delay
+        setTimeout(function() {
+          document.documentElement.style.scrollBehavior = 'smooth';
+        }, 100);
+        
+        return true;
+      } else {
+        console.log("24hour section not found");
+        return false;
+      }
+    }
+    
+    // Function to poll for the section if not immediately available
+    function pollForSection() {
+      if (scrollToSection()) return; // Exit if successful on first try
+      
+      // Set up polling to find the section (WordPress often loads content dynamically)
+      var attempts = 0;
+      var maxAttempts = 20; // Try for 10 seconds
+      var checkInterval = setInterval(function() {
+        attempts++;
+        if (scrollToSection() || attempts >= maxAttempts) {
+          clearInterval(checkInterval);
+        }
+      }, 500); // Check every 500ms
+    }
+    
+    // Check if URL contains the join-us hash
+    if (window.location.hash === '#join-us') {
+      console.log("Join-us hash detected in URL");
+      
+      // Try scrolling as early as possible
+      if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        pollForSection(); // Document already loaded
+      } else {
+        // Wait for DOM content to load
+        document.addEventListener('DOMContentLoaded', pollForSection);
+      }
+      
+      // Also try on full page load
+      window.addEventListener('load', function() {
+        // Additional delay after load to ensure dynamic content is rendered
+        setTimeout(pollForSection, 1000);
+      });
+      
+      // Also handle hash changes while on the page
+      window.addEventListener('hashchange', function() {
+        if (window.location.hash === '#join-us') {
+          pollForSection();
+        }
+      });
+    }
+  })();
+</script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -1099,7 +1151,6 @@
         </div>
     </div>
 
-
      <!-- Testimonials Section -->
      <section class="py-12 md:py-16 px-6 container mx-auto relative">
         <div class="text-center mb-10 ">
@@ -1607,6 +1658,7 @@
             </div>
         </div>
     </section>
+    
     <!-- Before and After Section-->
     <div class="py-12 md:py-16 px-6 container mx-auto">
         <div class="text-center mb-12">
