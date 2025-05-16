@@ -216,11 +216,6 @@
             box-shadow: 0 10px 20px rgba(0, 204, 51, 0.5);
         }
         
-        . {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
 
         .text-split-animation span {
             display: inline-block;
@@ -2716,8 +2711,11 @@ initializeCountdown();
 function handleHashNavigation() {
     // Get the hash from the URL (remove the # symbol)
     const hash = window.location.hash.substring(1);
-    
-    if (hash) {
+    const host = window.location.host === 'jacoboyekwe.github.io' ? 'jacoboyekwe.github.io' : window.location.host;
+    const pathname = window.location.pathname === '/jointheexperience/' ? '/jointheexperience/' : window.location.pathname;
+    const isSamePage = host + pathname ;
+
+    if (isSamePage) {
         // Add direct-scroll class to temporarily disable smooth scrolling
         document.documentElement.classList.add('direct-scroll');
         
